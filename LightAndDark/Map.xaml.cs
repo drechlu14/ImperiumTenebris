@@ -27,13 +27,16 @@ namespace LightAndDark
     {
         ObservableCollection<Statistics> itemsFromDbMap;
         public int progressBarValue;
+        public int pHPstatus;
+        public int eHPstatus;
         //private Statistics _player;
         //private Statistics _enemy;
 
         public Map(int check)
-        {
-            
+        {          
             InitializeComponent();
+
+            
 
             itemsFromDbMap = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             for (int i = 0; i <= 1; i++)
@@ -81,6 +84,7 @@ namespace LightAndDark
             ActualStatusPlayer01HP.DataContext = itemsFromDb1;
 
             Creation();
+            
             /*System.Windows.MessageBox.Show(check.ToString());*/
 
 
@@ -110,6 +114,7 @@ namespace LightAndDark
                 MaxStatusEnemy01HP.DataContext = itemsFromDb3;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb3;
             }
+            //Health();
         }
 
         private static StatisticsDatabase _database;
@@ -481,20 +486,25 @@ namespace LightAndDark
 
         private bool AttackButtonWasClicked = false;
 
-        private void AttackButton_Click(object sender, RoutedEventArgs e)
+        private void Health()
         {
-            AttackButtonWasClicked = true;
-
-            var pHPstatus = Int32.Parse(Player01HP.Content.ToString());
+            //System.Windows.MessageBox.Show(pHPstatus.ToString());
+            pHPstatus = Int32.Parse(Player01HP.Content.ToString());
             var playerAPstatus = Convert.ToString(Player01AP.Content);
             //var pAPstatus = ;
 
 
             var enemyHPstatus = Convert.ToString(Enemy01HP.Content);
-            var eHPstatus = Int32.Parse(enemyHPstatus);
+            eHPstatus = Int32.Parse(enemyHPstatus);
             var enemyAPstatus = Convert.ToString(Enemy01AP.Content);
             //var eAPstatus = Int32.Parse(enemyAPstatus);
+        }
 
+        private void AttackButton_Click(object sender, RoutedEventArgs e)
+        {
+            AttackButtonWasClicked = true;
+
+            Health();
 
             int[] numbers = new int[16] { -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             Random rd = new Random();
@@ -505,7 +515,8 @@ namespace LightAndDark
             {
                 int updateEnemyHP = Math.Abs(eHPstatus - progressBarValue - randomNumber);
                 ActualStatusEnemy01HP.Content = updateEnemyHP;
-
+                Database.UpdateItems(updateEnemyHP);
+                
                 
                 /*Statistics item = new Statistics();
                 item.ID = 4;
