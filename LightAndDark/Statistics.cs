@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace LightAndDark
 {
+
+
+
+
+
+
+
+
+
     public class Statistics
     {
         [PrimaryKey, AutoIncrement]
