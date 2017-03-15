@@ -35,8 +35,7 @@ namespace LightAndDark
         public Map(int check)
         {          
             InitializeComponent();
-
-            
+    
 
             itemsFromDbMap = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             for (int i = 0; i <= 1; i++)
