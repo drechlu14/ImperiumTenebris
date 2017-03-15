@@ -1,0 +1,217 @@
+﻿<Window x:Class="LightAndDark.Map"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LightAndDark"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920"
+         WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" >
+
+    <Window.Resources>
+
+        <!-- This style is used for buttons, to remove the WPF default 'animated' mouse over effect -->
+        <Style x:Key="TrasparentBackgroundButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="72" />
+            <Setter Property="FontFamily" Value="Trajan Pro" />
+            <Setter Property="Foreground" Value="#EE7600" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="0"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                                <Setter Property="Foreground" Value="#FFC04C" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Window.Background>
+        <ImageBrush ImageSource="https://student.sps-prosek.cz/~drechlu14/pics/map_01.jpg" />
+    </Window.Background>
+    <Grid>
+
+        <Label x:Name="StoryLabel" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Height="700" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" >
+            <Border Width="1500" Height="690" BorderThickness="5" CornerRadius="5" BorderBrush="DarkGray" Background="#050909" Padding="40">
+                <TextBlock x:Name="StoryTextBlock" TextAlignment="Justify" TextWrapping="WrapWithOverflow" FontFamily="Perpetua" FontWeight="Normal" FontSize="80">Prologue: Your journey begins here. Near the Alman lake where your last friend passed away. You gave him your tribute and cleared your mind. The only way to bring this world hope is to fight your way by purifying all the darkness, even if that should cost your life, you must fight!</TextBlock>
+            </Border>
+        </Label>
+
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight01Button" Click="Fight01Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="483,924,1179,0" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight02Button" Click="Fight02Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="205,768,1457,0" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight03Button" Click="Fight03Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="1255,768,407,0" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight04Button" Click="Fight04Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="445,496,1217,0" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight05Button" Click="Fight05Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="710,634,952,0" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight06Button" Click="Fight06Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="255,523,1407,0" RenderTransformOrigin="0.771,1.3" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
+        <Label Visibility="Hidden" x:Name="Player01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
+        <Label Visibility="Hidden" x:Name="Player01AP" Content="{Binding AP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
+        <TextBlock Visibility="Hidden" x:Name="NameTextBlock01" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" Text="{Binding Name}" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" FontFamily="Trajan Pro" FontSize="80" Foreground="White" Margin="174,19,0,0" >
+        </TextBlock>
+        <Image Visibility="Hidden" x:Name="ImageChar01" HorizontalAlignment="Left" VerticalAlignment="Center" Height="850" Margin="100">
+            <Image.Source>
+                <BitmapImage UriSource="https://student.sps-prosek.cz/~drechlu14/pics/light_char_01.jpg" />
+            </Image.Source>
+            <Image.ToolTip>
+                <ToolTip x:Name="ToolTipChar01" Placement="Left" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" >
+                    <ToolTip.Template>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <Path Margin="100,100,0,0" Fill="#e5AAAAAA" Data="M 0 16 L 16 0 L 32 16 Z"/>
+                                <Label x:Name="PlayerStatisticsLabel" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" >
+                                    <Border Width="850" BorderThickness="5" CornerRadius="5" BorderBrush="DarkGray" Background="#050909" Padding="40">
+                                        <TextBlock x:Name="StatisticsTextBlock" TextAlignment="Left" TextWrapping="WrapWithOverflow" FontFamily="Perpetua" FontWeight="Normal" FontSize="80" >
+                                            <Run Text="Title:"/>
+                                            <Run Text="{Binding Type}"/>
+                                            <Run Text="Light points: "/>
+                                            <Run Text="{Binding HP}"/>
+                                            <Run Text="  "/>
+                                            <Run Text="Attack Power:"/>
+                                            <Run Text="{Binding AP}"/>
+                                        </TextBlock>
+                                    </Border>
+                                </Label>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </ToolTip.Template>
+                </ToolTip>
+            </Image.ToolTip>
+        </Image>
+        <ProgressBar Visibility="Hidden" x:Name="ProgressBarPlayerHP" Value="10" Maximum="100" HorizontalAlignment="Left" Height="39" Margin="100,991,0,0" VerticalAlignment="Top" Width="453" Foreground="#E50000" />
+        <Label Visibility="Hidden" x:Name="ActualStatusPlayer01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="72,981,1665,10" />
+        <Label Visibility="Hidden" x:Name="DivideStatusPlayer01HP" Content=" / " HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="255,981,1581,10" />
+        <Label Visibility="Hidden" x:Name="MaxStatusPlayer01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="311,981,1331,10" />
+
+        <ProgressBar Visibility="Hidden" x:Name="ProgressBarLoop" HorizontalAlignment="Left" Height="38" Margin="757,992,0,0" VerticalAlignment="Top" Width="453" Foreground="#FFFF4C"/>
+
+        <Label Visibility="Hidden" x:Name="Enemy01CheckLabel" Content="Night Lynx" />
+        <Label Visibility="Hidden" x:Name="Enemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
+        <Label Visibility="Hidden" x:Name="Enemy01AP" Content="{Binding AP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
+        <TextBlock Visibility="Hidden" x:Name="EnemyTextBlock01" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" Text="{Binding Name}" TextAlignment="Left" HorizontalAlignment="Right" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" FontSize="80" FontFamily="Trajan Pro" Foreground="white" RenderTransformOrigin="0.412,0.594" Margin="0,19,75,0" >
+        </TextBlock>
+        <Image Visibility="Hidden" x:Name="Enemy01" HorizontalAlignment="Right" VerticalAlignment="Center" Height="850" Margin="100">
+            <Image.Source>
+                <BitmapImage UriSource="https://student.sps-prosek.cz/~drechlu14/pics/enemy_01.jpg" />
+            </Image.Source>
+            <Image.ToolTip>
+                <ToolTip x:Name="EnemyToolTip01" Placement="Left" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" >
+                    <ToolTip.Template>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <Path Margin="100,100,0,0" Fill="#e5AAAAAA" Data="M 0 16 L 16 0 L 32 16 Z"/>
+                                <Label x:Name="PlayerStatisticsLabel" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" >
+                                    <Border Width="850" BorderThickness="5" CornerRadius="5" BorderBrush="DarkGray" Background="#050909" Padding="40">
+                                        <TextBlock x:Name="StatisticsTextBlock" TextAlignment="Left" TextWrapping="WrapWithOverflow" FontFamily="Perpetua" FontWeight="Normal" FontSize="80" >
+                                            <Run Text="Title:"/>
+                                            <Run Text="{Binding Type}"/>
+                                            <Run Text="Light points: "/>
+                                            <Run Text="{Binding HP}"/>
+                                            <Run Text="  "/>
+                                            <Run Text="Attack Power:"/>
+                                            <Run Text="{Binding AP}"/>
+                                        </TextBlock>
+                                    </Border>
+                                </Label>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </ToolTip.Template>
+                </ToolTip>
+            </Image.ToolTip>
+        </Image>
+        <ProgressBar Visibility="Hidden" x:Name="ProgressBarEnemyHP" Value="50" Maximum="100" HorizontalAlignment="Left" Height="39" Margin="1367,991,0,0" VerticalAlignment="Top" Width="453" Foreground="#FFFF4C"/>
+        <Label Visibility="Hidden" x:Name="ActualStatusEnemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1341,981,396,10" />
+        <Label Visibility="Hidden" x:Name="DivideStatusEnemy01HP" Content=" / " HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1529,981,307,10" />
+        <Label Visibility="Hidden" x:Name="MaxStatusEnemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1587,981,55,10" />
+
+        <Label x:Name="PlayerUpdate01HP" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="452" Height="106" FontSize="80" FontFamily="Perpetua" Foreground="white" FontWeight="Bold" RenderTransformOrigin="0.517,-4.273" Margin="710,559,758,415" />
+        <Label Visibility="Hidden" x:Name="HoldHelp" Content="(Click to attack an enemy.)" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="700" FontSize="34" FontFamily="Perpetua" Foreground="white" FontWeight="Bold" RenderTransformOrigin="0.517,-4.273" Margin="613,351,607,685" />
+        <Button Visibility="Hidden" x:Name="ChargeButton" Click="ChargeButton_Click" Content="Charge!" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" Margin="300" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Visibility="Hidden" x:Name="AttackButton" Click="AttackButton_Click" Content="Attack!" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" Margin="400" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Visibility="Hidden" x:Name="NextStageButton" Click="NextStageButton_Click" Content="Next Stage" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" Margin="710,831,710,0" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="SurrenderButton" Visibility="Hidden" Click="SurrenderButton_Click" Content="Surrender" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" MinHeight="98" Margin="0,800,0,0" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
+
+
+
+        <Button x:Name="NextButton" Click="NextButton_Click" Content="Next" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="50" Padding="5" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
+        <!-- info about database content 
+        <StackPanel>
+            <Label x:Name="ItemsCount"></Label>
+            <ListView x:Name="ToDoItemsListView"></ListView>
+        </StackPanel>
+        -->
+
+
+    </Grid>
+</Window>
