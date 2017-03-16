@@ -113,7 +113,8 @@ namespace LightAndDark
                 MaxStatusEnemy01HP.DataContext = itemsFromDb3;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb3;
             }
-            //Health();
+                        
+            Health();
         }
 
         private static StatisticsDatabase _database;
@@ -488,7 +489,9 @@ namespace LightAndDark
         private void Health()
         {
             //System.Windows.MessageBox.Show(pHPstatus.ToString());
-            pHPstatus = Int32.Parse(Player01HP.Content.ToString());
+            //pHPstatus = Int32.Parse(Player01HP.Content.ToString());
+            //var playerHPstatus = Convert.ToString(Player01HP.Content);
+            //pHPstatus = Int32.Parse(playerHPstatus);
             var playerAPstatus = Convert.ToString(Player01AP.Content);
             //var pAPstatus = ;
 
@@ -503,7 +506,7 @@ namespace LightAndDark
         {
             AttackButtonWasClicked = true;
 
-            Health();
+            //Health();
 
             int[] numbers = new int[16] { -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             Random rd = new Random();
@@ -530,6 +533,10 @@ namespace LightAndDark
 
             if (pHPstatus > 0)
             {
+                int updatePlayerHP = Math.Abs(pHPstatus - progressBarValue - randomNumber);
+                ActualStatusPlayer01HP.Content = updatePlayerHP;
+                Database.UpdateItems(updatePlayerHP);
+
                 //int updatePlayerHP = Math.Abs(pHPstatus - eAPstatus - randomNumber);
                 //ActualStatusPlayer01HP.Content = updatePlayerHP;
 
