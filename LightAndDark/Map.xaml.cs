@@ -114,7 +114,7 @@ namespace LightAndDark
                 ActualStatusEnemy01HP.DataContext = itemsFromDb3;
             }
                         
-            Health();
+            //Health();
         }
 
         private static StatisticsDatabase _database;
@@ -360,8 +360,78 @@ namespace LightAndDark
                     " interested what’s at the top of the tower and I hope he was the only guardian";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
+            if (count == 24)
+            {
+                StoryTextBlock.Text =
+                    "Let’s go inside and check the light on the top… what, the light is gone? That’s really" +
+                    " wierd, I’m sure that I saw it before the first Tenebri was defeated near the Alman lake.";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+            if (count == 25)
+            {
+                StoryTextBlock.Text =
+                    "That means I have to choose where I’ll go next, first choice is to come behind the lake and see if anything" +
+                    " happened on the other side and second choice is to try the second tower, where was also the light. Sooo.. which one?";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+            if (count == 26)
+            {
+                count++;
+                StoryLabel.Visibility = Visibility.Hidden;
+                NextButton.Visibility = Visibility.Hidden;
+                FirstChoiceAreaButton.Visibility = Visibility.Visible;
+                SecondChoiceAreaButton.Visibility = Visibility.Visible;
+            }
+            if (count == 28)
+            {
+                if (FirstChoiceAreaButtonWasClicked)
+                {
+
+                }
+
+                if (SecondChoiceAreaButtonWasClicked)
+                {
+
+                }
+            }
 
         }
+
+        private bool FirstChoiceAreaButtonWasClicked = false;
+        private bool SecondChoiceAreaButtonWasClicked = false;
+
+        private void FirstChoiceAreaButton_Click(object sender, RoutedEventArgs e)
+        {
+            FirstChoiceAreaButtonWasClicked = true;
+            count++;
+            if (count == 27)
+            {
+                StoryLabel.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Visible;
+                FirstChoiceAreaButton.Visibility = Visibility.Hidden;
+                SecondChoiceAreaButton.Visibility = Visibility.Hidden;
+                StoryTextBlock.Text =
+                    "Alman lake sound like a right choice, there must be something if the light isn’t here. I’m going to find out what happened";
+                StoryTextBlock.Style = (Style) Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+        }
+
+        private void SecondChoiceAreaButton_Click(object sender, RoutedEventArgs e)
+        {
+            SecondChoiceAreaButtonWasClicked = true;
+            count++;
+            if (count == 27)
+            {
+                StoryLabel.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Visible;
+                FirstChoiceAreaButton.Visibility = Visibility.Hidden;
+                SecondChoiceAreaButton.Visibility = Visibility.Hidden;
+                StoryTextBlock.Text =
+                    "Investigate the second tower should be the right choice. I saw a light there and I expect that I'll find out more then here.";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+        }
+
         private void ShowFight()
         {
             ImageChar01.Visibility = Visibility.Visible;
@@ -506,7 +576,7 @@ namespace LightAndDark
         {
             AttackButtonWasClicked = true;
 
-            //Health();
+            Health();
 
             int[] numbers = new int[16] { -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             Random rd = new Random();
@@ -574,35 +644,6 @@ namespace LightAndDark
             ProgressBarLoop.Visibility = Visibility.Hidden;
             ProgressBarPlayerHP.Visibility = Visibility.Hidden;
             ProgressBarEnemyHP.Visibility = Visibility.Hidden;
-        }
-        private bool AutoAttackWasClicked = false;
-        private async void AutoClickFight_Click()
-        {
-            AutoAttackWasClicked = true;
-
-            var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
-            await Task.Run(() =>
-            {
-
-                for (int i = 0; i < 100; i++)
-                {
-                    if (i >= 99) { i = 0; }
-
-                    if (AutoAttackWasClicked)
-                    {
-                        break;
-                        progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
-                    }
-
-                    ((IProgress<int>)progress).Report(i);
-                    Thread.Sleep(100);
-                }
-                //Thread.Sleep(100);
-            });
-        }
-        private void SurrenderButton_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
 

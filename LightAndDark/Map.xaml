@@ -190,12 +190,16 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button x:Name="SurrenderButton" Visibility="Hidden" Click="SurrenderButton_Click" Content="Surrender" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" MinHeight="98" Margin="0,800,0,0" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+        <Button Visibility="Hidden" x:Name="FirstChoiceAreaButton" Click="FirstChoiceAreaButton_Click" Content="Alman lake" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,1094,54" Padding="5" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-
+        <Button Visibility="Hidden" x:Name="SecondChoiceAreaButton" Click="SecondChoiceAreaButton_Click" Content="Second tower" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,355,54" Padding="5" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
 
 
 
