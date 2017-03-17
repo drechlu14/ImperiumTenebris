@@ -335,9 +335,9 @@ namespace LightAndDark
             if (count == 21)
             {
                 StoryTextBlock.Text =
-                    "(Half an hour later) Alright, I’m better now, so what do we have here – an entrance to the" +
-                    " Tower. I will carefully try to proceed. Or.. maybe not? This will maybe be a little problem" +
-                    " a Tenebri with a katana just looking right at me. I doubt that i could escape him." +
+                    "(Later..) Alright, I’m better now, so what do we have here – an entrance to the" +
+                    " Tower. I will carefully try to proceed. Or maybe not? This could be a little problem" +
+                    " a Tenebri with a katana is just looking right at me. I doubt that i could escape him." +
                     " Fight with all I’ve got to reach the light!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
@@ -512,7 +512,7 @@ namespace LightAndDark
             if (count == 34)
             {
                 StoryTextBlock.Text =
-                    "(Half an hour later) Alright, I’m better and here’s the entrace. Now, let’s face my biggest enemy, the" +
+                    "(Later..) Alright, I’m better and here’s the entrace. Now, let’s face my biggest enemy, the" +
                     " strongest enemy guarding our light my friends. I’ll give it everything I’ve got. MITTE LUCEM! Give me" +
                     " your highest power, LIGHT! (+50AP)";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
@@ -581,7 +581,9 @@ namespace LightAndDark
             }
             if (count == 40)
             {
-
+                MainWindow selectionWindow = new MainWindow();
+                selectionWindow.Show();
+                this.Close();
             }
 
         }
