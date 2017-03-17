@@ -366,20 +366,15 @@ namespace LightAndDark
             }
             if (count == 25)
             {
+                FirstChoiceAreaButton.Visibility = Visibility.Visible;
+                SecondChoiceAreaButton.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Hidden;
                 StoryTextBlock.Text =
                     "That means I have to choose where I’ll go next, first choice is to come behind the lake and see if anything" +
                     " happened on the other side and second choice is to try the second tower, where was also the light. Sooo.. which one?";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
-            if (count == 26)
-            {
-                count++;
-                StoryLabel.Visibility = Visibility.Hidden;
-                NextButton.Visibility = Visibility.Hidden;
-                FirstChoiceAreaButton.Visibility = Visibility.Visible;
-                SecondChoiceAreaButton.Visibility = Visibility.Visible;
-            }
-            if (count == 29)
+            if (count == 27)
             {
                 if (FirstChoiceAreaButtonWasClicked)
                 {
@@ -398,12 +393,19 @@ namespace LightAndDark
                 if (SecondChoiceAreaButtonWasClicked)
                 {
                     StoryTextBlock.Text =
-                        "Second tower" +
-                        " choice text";
+                        "The climate is drasticaly changing on my way to the second tower, it’s much colder here." +
+                        " Also the landscape, from forrest plains to mountains. I haven’t seen any Temebri so far, I" +
+                        " don’t know if I should be happy about that. I just have to be caraful, who knows what kind" +
+                        " of darkness can hide in these conditions.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource =
+                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_04.jpg", UriKind.Absolute));
+                    this.Background = myBrush;
                 }
             }
-            if (count == 30)
+            if (count == 28)
             {
                 if (FirstChoiceAreaButtonWasClicked)
                 {
@@ -421,13 +423,12 @@ namespace LightAndDark
                 if (SecondChoiceAreaButtonWasClicked)
                 {
                     StoryTextBlock.Text =
-                        "Second tower" +
-                        " choice text";
+                        "Here we are, at the entrace of the second tower, without any guard. This seems suspicious, but who cares." +
+                        " I need to climb at the top to see the light.. or even darkness.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
                 }
             }
-
-            if (count == 31)
+            if (count == 29)
             {
                 if (FirstChoiceAreaButtonWasClicked)
                 {
@@ -441,22 +442,160 @@ namespace LightAndDark
                 if (SecondChoiceAreaButtonWasClicked)
                 {
                     StoryTextBlock.Text =
-                        "Second tower" +
-                        " choice text";
+                        "WHAT?! How did I get there? I was just right in the mountains and now I’m in the air on some" +
+                        " wierd flying tower. And like if that wasn’t enough. Avarage size Tenebri is in front of me, it" +
+                        " looks like he’s the master of this tower. I must defeat him!";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource =
+                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_05.jpg", UriKind.Absolute));
+                    this.Background = myBrush;
+                }
+            }
+            if (count == 30)
+            {
+                if (FirstChoiceAreaButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "As I expected, really tough – and the light just disappeared! Maybe it’s something inside the" +
+                        " tree, let’s explore it.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
                 }
+
+                if (SecondChoiceAreaButtonWasClicked)
+                {
+                    count++;
+                    StoryLabel.Visibility = Visibility.Hidden;
+                    Fight08Button.Visibility = Visibility.Visible;
+                    NextButton.Visibility = Visibility.Hidden;
+                    Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_08.jpg"));
+                }
+            }
+            if (count == 31)
+            {
+                if (FirstChoiceAreaButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "Daaaaarknesss everywhere. Wait! A portal.. something is happening.";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                }
+
+                if (SecondChoiceAreaButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "He was sure an incredibly skilled Tenebri, but now it’s no time to lose – the tower is falling down!" +
+                        " I must get to the place where I was „teleported“ or I’m really done here.";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                }
+            }
+            if (count == 32)
+            {
+                StoryTextBlock.Text =
+                    "I’m back here, really.. as I should be surprised by anything in this world. Now I see it clearly, both" +
+                    " towers are without lights. And.. was that here before? Lot of light in the center of Alman lake – Altar" +
+                    " or something like that. I’m sure that wasn’t there before.";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                ImageBrush myBrush = new ImageBrush();
+                myBrush.ImageSource =
+                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/map_01.jpg", UriKind.Absolute));
+                this.Background = myBrush;
+            }
+            if (count == 33)
+            {
+                StoryTextBlock.Text =
+                    "First of all, I should heal my wounds from last battle, it looks like I’ll meet my" +
+                    " final enemy, so I should be prepared for that.";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+            if (count == 34)
+            {
+                StoryTextBlock.Text =
+                    "(Half an hour later) Alright, I’m better and here’s the entrace. Now, let’s face my biggest enemy, the" +
+                    " strongest enemy guarding our light my friends. I’ll give it everything I’ve got. MITTE LUCEM! Give me" +
+                    " your highest power, LIGHT! (+50AP)";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                ImageBrush myBrush = new ImageBrush();
+                myBrush.ImageSource =
+                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_entrance_area.jpg", UriKind.Absolute));
+                this.Background = myBrush;
+            }
+            if (count == 35)
+            {
+                count++;
+                StoryLabel.Visibility = Visibility.Hidden;
+                Fight09Button.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Hidden;
+                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss.jpg"));
+
+                ImageBrush myBrush = new ImageBrush();
+                myBrush.ImageSource =
+                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_area.jpg", UriKind.Absolute));
+                this.Background = myBrush;
+            }
+            if (count == 36)
+            {
+                FirstChoiceHopeButton.Visibility = Visibility.Visible;
+                SecondChoiceHopeButton.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Hidden;
+
+                StoryTextBlock.Text =
+                    "WE’VE DONE IT LIGHTS! We’ve won over darkness for once! Now with the power of this light I can do something" +
+                    " about this situation. But it’s not enough light to take everything back to normal. I can just choose" +
+                    " between those two options.";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                ImageBrush myBrush = new ImageBrush();
+                myBrush.ImageSource =
+                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_entrance_area.jpg", UriKind.Absolute));
+                this.Background = myBrush;
+            }
+            if (count == 38)
+            {
+                if (FirstChoiceHopeButtonWasClicked || SecondChoiceHopeButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "Epilogue: That was the story of  a brave light, which was fighting for the side of hope and won every fight till" +
+                        " the end, despite of all the loneliness and desperation. Purpose of this game was to show you, that if there is" +
+                        " even small trace of hope, you should chase it and never let it go.";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource =
+                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/hope_area.jpg", UriKind.Absolute));
+                    this.Background = myBrush;
+                }
+            }
+            if (count == 39)
+            {
+                if (FirstChoiceHopeButtonWasClicked || SecondChoiceHopeButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "Epilogue: Thank you for playing my game. Author: Lukas Drechsel";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+
+                    NextButton.Content = "The END";
+                }
+            }
+            if (count == 40)
+            {
+
             }
 
         }
 
         private bool FirstChoiceAreaButtonWasClicked = false;
         private bool SecondChoiceAreaButtonWasClicked = false;
+        private bool FirstChoiceHopeButtonWasClicked = false;
+        private bool SecondChoiceHopeButtonWasClicked = false;
 
         private void FirstChoiceAreaButton_Click(object sender, RoutedEventArgs e)
         {
             FirstChoiceAreaButtonWasClicked = true;
             count++;
-            if (count == 28)
+            if (count == 26)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
@@ -472,7 +611,7 @@ namespace LightAndDark
         {
             SecondChoiceAreaButtonWasClicked = true;
             count++;
-            if (count == 27)
+            if (count == 26)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
@@ -480,6 +619,40 @@ namespace LightAndDark
                 SecondChoiceAreaButton.Visibility = Visibility.Hidden;
                 StoryTextBlock.Text =
                     "Investigate the second tower should be the right choice. I saw a light there and I expect that I'll find out more then here.";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+        }
+
+        private void FirstChoiceHopeButton_Click(object sender, RoutedEventArgs e)
+        {
+            FirstChoiceHopeButtonWasClicked = true;
+            count++;
+            if (count == 37)
+            {
+                StoryLabel.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Visible;
+                FirstChoiceAreaButton.Visibility = Visibility.Hidden;
+                SecondChoiceAreaButton.Visibility = Visibility.Hidden;
+                StoryTextBlock.Text =
+                    "What world would it be without me living in it? I’m sure my friends will be proud for me that I’ve defeated" +
+                    " the Tenebri and once again saved the world from darkness. Now let’s use it for it’s purpose. LUCIFER LUX!";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+        }
+
+        private void SecondChoiceHopeButton_Click(object sender, RoutedEventArgs e)
+        {
+            SecondChoiceHopeButtonWasClicked = true;
+            count++;
+            if (count == 37)
+            {
+                StoryLabel.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Visible;
+                FirstChoiceAreaButton.Visibility = Visibility.Hidden;
+                SecondChoiceAreaButton.Visibility = Visibility.Hidden;
+                StoryTextBlock.Text =
+                    "What friend would I be if I can’t even show my friends this beautiful world again? The answer is clear, I’ve" +
+                    " done my job, now it’s my turn to go to sleep. I’m giving this world to all of you.. REINCARNATION, ET LUMEN!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
         }
@@ -576,47 +749,42 @@ namespace LightAndDark
             ShowFight();
             Fight02Button.Visibility = Visibility.Hidden;       
         }
-
         private void Fight03Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
             Fight03Button.Visibility = Visibility.Hidden;
         }
-
         private void Fight04Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
             Fight04Button.Visibility = Visibility.Hidden;
         }
-
         private void Fight05Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
             Fight05Button.Visibility = Visibility.Hidden;
         }
-
         private void Fight06Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
             Fight06Button.Visibility = Visibility.Hidden;
         }
-
         private void Fight07Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
             Fight07Button.Visibility = Visibility.Hidden;
         }
-
         private void Fight08Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
             Fight08Button.Visibility = Visibility.Hidden;
         }
-
-        /*private void AttackButton_MouseDown(object sender, RoutedEventArgs e)
+        private void Fight09Button_Click(object sender, RoutedEventArgs e)
         {
+            ShowFight();
+            Fight09Button.Visibility = Visibility.Hidden;
+        }
 
-        }*/
 
         private bool AttackButtonWasClicked = false;
 

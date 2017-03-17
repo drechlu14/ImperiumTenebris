@@ -98,12 +98,17 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight08Button" Click="Fight07Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="37,190,1625,0" RenderTransformOrigin="0.771,1.3" >
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight08Button" Click="Fight08Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="37,190,1625,0" RenderTransformOrigin="0.771,1.3" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="Fight09Button" Click="Fight09Button_Click" Visibility="Hidden" Content="Fight!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="613,634,1049,0" RenderTransformOrigin="0.771,1.3" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        
         <Label Visibility="Hidden" x:Name="Player01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
         <Label Visibility="Hidden" x:Name="Player01AP" Content="{Binding AP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
         <TextBlock Visibility="Hidden" x:Name="NameTextBlock01" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" Text="{Binding Name}" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" FontFamily="Trajan Pro" FontSize="80" Foreground="White" Margin="174,19,0,0" >
@@ -206,6 +211,16 @@
             </Button.Effect>
         </Button>
         <Button Visibility="Hidden" x:Name="SecondChoiceAreaButton" Click="SecondChoiceAreaButton_Click" Content="Second tower" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,355,54" Padding="5" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Visibility="Hidden" x:Name="FirstChoiceHopeButton" Click="FirstChoiceHopeButton_Click" Content="Single light" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,1094,54" Padding="5" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Visibility="Hidden" x:Name="SecondChoiceHopeButton" Click="SecondChoiceHopeButton_Click" Content="Combine lights" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,274,54" Padding="5" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
