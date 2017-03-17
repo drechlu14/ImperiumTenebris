@@ -234,8 +234,7 @@ namespace LightAndDark
                 StoryTextBlock.Text =
                     "That was quite a balanced Tenebri, wasn’t expecting that. At least it looks like I can go further." +
                     " I‘m still going, but haven’t seen any Tenebri or shore in the distance. Maybe it’s just my" +
-                    " imagination, but it feels like I should arrive at the shore at anytime, but I can’t even see it." +
-                    " What the hell is happening here?!";
+                    " imagination, but it feels like I should arrive at the shore at anytime, but I can’t even see it.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
             if (count == 13)
@@ -259,8 +258,6 @@ namespace LightAndDark
                 myBrush.ImageSource =
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01_light.jpg", UriKind.Absolute));
                 this.Background = myBrush;
-
-
             }
             if (count == 14)
             {
@@ -286,7 +283,7 @@ namespace LightAndDark
             if (count == 16)
             {
                 StoryTextBlock.Text =
-                    "Awesome, I’m out o fit, finally something else. And what’s even better, I can" +
+                    "Awesome, I’m out of it, finally something else. And what’s even better, I can" +
                     " see the exit, it’s not the shore tho, but I can tell where I’m now, near the tower" +
                     " that I need to examine for the source of light.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
@@ -382,16 +379,71 @@ namespace LightAndDark
                 FirstChoiceAreaButton.Visibility = Visibility.Visible;
                 SecondChoiceAreaButton.Visibility = Visibility.Visible;
             }
-            if (count == 28)
+            if (count == 29)
             {
                 if (FirstChoiceAreaButtonWasClicked)
                 {
+                    StoryTextBlock.Text =
+                        "Those mountains are quite amazing! Open areas are better choice for me, that’s for sure." +
+                        " Still I’m surprised that there weren’t any Tenebri on the way here, maybe I’m just" +
+                        " lucky, but that won’t last for long I’m on my way to the Alman lake.";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource =
+                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_06.jpg", UriKind.Absolute));
+                    this.Background = myBrush;
                 }
 
                 if (SecondChoiceAreaButtonWasClicked)
                 {
+                    StoryTextBlock.Text =
+                        "Second tower" +
+                        " choice text";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                }
+            }
+            if (count == 30)
+            {
+                if (FirstChoiceAreaButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "A big tree, interesting. WHAT!? A Tenebri with light behind" +
+                        " him, I must defeat him, but it won’t be that easy, this guy looks tough.";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource =
+                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_07.jpg", UriKind.Absolute));
+                    this.Background = myBrush;
+                }
+
+                if (SecondChoiceAreaButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "Second tower" +
+                        " choice text";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                }
+            }
+
+            if (count == 31)
+            {
+                if (FirstChoiceAreaButtonWasClicked)
+                {
+                    count++;
+                    StoryLabel.Visibility = Visibility.Hidden;
+                    Fight07Button.Visibility = Visibility.Visible;
+                    NextButton.Visibility = Visibility.Hidden;
+                    Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_09.jpg"));
+                }
+
+                if (SecondChoiceAreaButtonWasClicked)
+                {
+                    StoryTextBlock.Text =
+                        "Second tower" +
+                        " choice text";
+                    StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
                 }
             }
 
@@ -404,7 +456,7 @@ namespace LightAndDark
         {
             FirstChoiceAreaButtonWasClicked = true;
             count++;
-            if (count == 27)
+            if (count == 28)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
@@ -547,6 +599,18 @@ namespace LightAndDark
         {
             ShowFight();
             Fight06Button.Visibility = Visibility.Hidden;
+        }
+
+        private void Fight07Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShowFight();
+            Fight07Button.Visibility = Visibility.Hidden;
+        }
+
+        private void Fight08Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShowFight();
+            Fight08Button.Visibility = Visibility.Hidden;
         }
 
         /*private void AttackButton_MouseDown(object sender, RoutedEventArgs e)
