@@ -26,7 +26,7 @@ namespace LightAndDark
     public partial class Map : Window
     {
         ObservableCollection<Statistics> itemsFromDbMap;
-        public int progressBarValue;
+        public int actualValue;
         public int pHPstatus;
         public int eHPstatus;
         //private Statistics _player;
@@ -756,44 +756,13 @@ namespace LightAndDark
             ProgressBarEnemyHP.Visibility = Visibility.Visible;
         }
 
-        private async void Fight01Button_Click(object sender, RoutedEventArgs e)
+        private void Fight01Button_Click(object sender, RoutedEventArgs e)
         {
+            //přidat async (u void)
             ShowFight();
             Fight01Button.Visibility = Visibility.Hidden;
 
-            AttackButtonWasClicked = false;
-
-            var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
-            await Task.Run(() =>
-            {
-
-                for (int i = 0; i < 100; i++)
-                {
-                    if (i >= 99)
-                    {
-                        i = 0;
-                    }
-
-                    if (AttackButtonWasClicked)
-                    {
-
-                        break;
-                        progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
-                    }
-
-                    ((IProgress<int>)progress).Report(i);
-                    Thread.Sleep(10);
-                }
-
-                // Thread.Sleep(2000);
-                // AutoClickFight_Click();   
-            });
-        }
-
-        private async void ChargeButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowFight();
-            AttackButtonWasClicked = false;
+            /*AttackButtonWasClicked = false;
 
             var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
             await Task.Run(() =>
@@ -810,12 +779,49 @@ namespace LightAndDark
                     {
                         ManualResetEvent mre = new ManualResetEvent(false);
                         mre.WaitOne();
-                        progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
+                        //progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
+                        mre.Set();
+                    }
+
+                    ((IProgress<int>)progress).Report(i);
+                    Thread.Sleep(10);
+                }
+
+                // Thread.Sleep(2000);
+                // AutoClickFight_Click();   
+            });*/
+        }
+
+        private async void ChargeButton_Click(object sender, RoutedEventArgs e)
+        {
+            AttackButtonWasClicked = false;
+
+            var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
+            await Task.Run(() =>
+            {
+
+                for (int progressBarValue = 0; progressBarValue < 100; progressBarValue++)
+                {
+                    if (progressBarValue >= 99)
+                    {
+                        progressBarValue = 0;
+
+                    }
+
+                    if (AttackButtonWasClicked)
+                    {
+                        
+                        ManualResetEvent mre = new ManualResetEvent(false);
+                        mre.WaitOne();
+                        actualValue = progressBarValue;
+                        System.Windows.MessageBox.Show(actualValue.ToString());
+                        //progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
                         mre.Set();
 
                     }
 
-                    ((IProgress<int>)progress).Report(i);
+
+                    ((IProgress<int>)progress).Report(progressBarValue);
                     Thread.Sleep(10);
                 }
 
@@ -901,7 +907,8 @@ namespace LightAndDark
 
             if (eHPstatus > 0)
             {
-                int updateEnemyHP = Math.Abs(eHPstatus - progressBarValue);
+                //System.Windows.MessageBox.Show(actualValue.ToString());
+                int updateEnemyHP = Math.Abs(eHPstatus - actualValue);
                 ActualStatusEnemy01HP.Content = updateEnemyHP;
                 Database.UpdateItems(updateEnemyHP);
                 
@@ -917,7 +924,7 @@ namespace LightAndDark
             {
                 Thread.Sleep(2000);
 
-                int updatePlayerHP = Math.Abs(pHPstatus - progressBarValue - randomNumber);
+                int updatePlayerHP = Math.Abs(pHPstatus - actualValue - randomNumber);
                 ActualStatusPlayer01HP.Content = updatePlayerHP;
                 Database.UpdateItems(updatePlayerHP);
 
