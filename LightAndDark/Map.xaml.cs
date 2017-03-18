@@ -117,6 +117,7 @@ namespace LightAndDark
             Player01AP.DataContext = itemsFromDb1;
             MaxStatusPlayer01HP.DataContext = itemsFromDb1;
             ActualStatusPlayer01HP.DataContext = itemsFromDb1;
+            ProgressBarPlayerHP.DataContext = itemsFromDb1;
 
             Creation();
             
@@ -137,6 +138,7 @@ namespace LightAndDark
                 Enemy01AP.DataContext = itemsFromDb1;
                 MaxStatusEnemy01HP.DataContext = itemsFromDb1;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
             }
             if (Enemy01CheckLabel.Content.ToString() == "Blightseeker")
             {
@@ -148,6 +150,7 @@ namespace LightAndDark
                 Enemy01AP.DataContext = itemsFromDb1;
                 MaxStatusEnemy01HP.DataContext = itemsFromDb1;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
             }
             if (Enemy01CheckLabel.Content.ToString() == "Vexspawn")
             {
@@ -159,6 +162,7 @@ namespace LightAndDark
                 Enemy01AP.DataContext = itemsFromDb1;
                 MaxStatusEnemy01HP.DataContext = itemsFromDb1;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
             }
             if (Enemy01CheckLabel.Content.ToString() == "Auramirage")
             {
@@ -170,6 +174,7 @@ namespace LightAndDark
                 Enemy01AP.DataContext = itemsFromDb1;
                 MaxStatusEnemy01HP.DataContext = itemsFromDb1;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
             }
             if (Enemy01CheckLabel.Content.ToString() == "Spiritfoot")
             {
@@ -181,6 +186,7 @@ namespace LightAndDark
                 Enemy01AP.DataContext = itemsFromDb1;
                 MaxStatusEnemy01HP.DataContext = itemsFromDb1;
                 ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
             }
 
             //Health();
@@ -737,8 +743,7 @@ namespace LightAndDark
             ImageChar01.Visibility = Visibility.Visible;
             Enemy01.Visibility = Visibility.Visible;
             AttackButton.Visibility = Visibility.Visible;
-            ChargeButton.Visibility = Visibility.Visible;
-            NextStageButton.Visibility = Visibility.Visible;
+            ChargeButton.Visibility = Visibility.Visible;            
             NameTextBlock01.Visibility = Visibility.Visible;
             ActualStatusPlayer01HP.Visibility = Visibility.Visible;
             DivideStatusPlayer01HP.Visibility = Visibility.Visible;
@@ -803,9 +808,11 @@ namespace LightAndDark
 
                     if (AttackButtonWasClicked)
                     {
-
-                        break;
+                        ManualResetEvent mre = new ManualResetEvent(false);
+                        mre.WaitOne();
                         progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
+                        mre.Set();
+
                     }
 
                     ((IProgress<int>)progress).Report(i);
@@ -867,16 +874,18 @@ namespace LightAndDark
         {
             //System.Windows.MessageBox.Show(pHPstatus.ToString());
             //pHPstatus = Int32.Parse(Player01HP.Content.ToString());
-            //var playerHPstatus = Convert.ToString(Player01HP.Content);
-            //pHPstatus = Int32.Parse(playerHPstatus);
+            var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);
+            pHPstatus = Int32.Parse(playerHPstatus);
             var playerAPstatus = Convert.ToString(Player01AP.Content);
             //var pAPstatus = ;
+            ProgressBarPlayerHP.Maximum = pHPstatus;
 
 
-            var enemyHPstatus = Convert.ToString(Enemy01HP.Content);
+            var enemyHPstatus = Convert.ToString(ActualStatusEnemy01HP.Content);
             eHPstatus = Int32.Parse(enemyHPstatus);
             var enemyAPstatus = Convert.ToString(Enemy01AP.Content);
             //var eAPstatus = Int32.Parse(enemyAPstatus);
+            ProgressBarEnemyHP.Maximum = eHPstatus;
         }
 
         private void AttackButton_Click(object sender, RoutedEventArgs e)
@@ -892,38 +901,31 @@ namespace LightAndDark
 
             if (eHPstatus > 0)
             {
-                int updateEnemyHP = Math.Abs(eHPstatus - progressBarValue - randomNumber);
+                int updateEnemyHP = Math.Abs(eHPstatus - progressBarValue);
                 ActualStatusEnemy01HP.Content = updateEnemyHP;
                 Database.UpdateItems(updateEnemyHP);
                 
-                
-                /*Statistics item = new Statistics();
-                item.ID = 4;
-                item.enemycheck = 1;
-                item.HP = updateEnemyHP;
-                Database.SaveItemAsync(item);*/
             }
             else
             {
+                NextStageButton.Visibility = Visibility.Visible;
+                VictoryTextBlock.Visibility = Visibility.Visible;
                 //Show next stage button after win
             }
 
             if (pHPstatus > 0)
             {
+                Thread.Sleep(2000);
+
                 int updatePlayerHP = Math.Abs(pHPstatus - progressBarValue - randomNumber);
                 ActualStatusPlayer01HP.Content = updatePlayerHP;
                 Database.UpdateItems(updatePlayerHP);
 
-                //int updatePlayerHP = Math.Abs(pHPstatus - eAPstatus - randomNumber);
-                //ActualStatusPlayer01HP.Content = updatePlayerHP;
-
-                /*Statistics item = new Statistics();
-                item.ID = 1;
-                item.HP = updatePlayerHP;
-                Database.SaveItemAsync(item);*/
             }
             else
             {
+                LoseButton.Visibility = Visibility.Visible;
+                LoseTextBlock.Visibility = Visibility.Visible;
                 //Show losser button after lose
             }
 
@@ -939,6 +941,8 @@ namespace LightAndDark
             AttackButton.Visibility = Visibility.Hidden;
             ChargeButton.Visibility = Visibility.Hidden;
             NextStageButton.Visibility = Visibility.Hidden;
+            VictoryTextBlock.Visibility = Visibility.Hidden;
+            LoseTextBlock.Visibility = Visibility.Hidden;
             NameTextBlock01.Visibility = Visibility.Hidden;
             ActualStatusPlayer01HP.Visibility = Visibility.Hidden;
             DivideStatusPlayer01HP.Visibility = Visibility.Hidden;
@@ -951,6 +955,12 @@ namespace LightAndDark
             ProgressBarLoop.Visibility = Visibility.Hidden;
             ProgressBarPlayerHP.Visibility = Visibility.Hidden;
             ProgressBarEnemyHP.Visibility = Visibility.Hidden;
+        }
+        private void LoseButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow selectionWindow = new MainWindow();
+            selectionWindow.Show();
+            this.Close();
         }
 
 
