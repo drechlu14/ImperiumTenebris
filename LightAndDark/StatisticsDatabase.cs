@@ -52,9 +52,14 @@ namespace LightAndDark
             return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE ID = 4");
         }
 
-        public Task<List<Statistics>> UpdateItems(int HP)
+        public Task<List<Statistics>> UpdateItems(int HP, string atributName)
         {
-            return database.QueryAsync<Statistics>("UPDATE [Statistics] SET [HP] = '" + HP + "' ");
+            return database.QueryAsync<Statistics>("UPDATE [Statistics] SET [HP] = '" + HP + "' WHERE [Name] = '" + atributName + "'");
+        }
+
+        public Task<List<Statistics>> GetItemsFromDatabase(int ID)
+        {
+            return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE [ID] = " + ID);
         }
 
         // Saving statistics data

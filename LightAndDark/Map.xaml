@@ -241,12 +241,12 @@
             </Button.Effect>
         </Button>
 
-        <!-- info about database content 
+        <!-- info about database content -->
         <StackPanel>
             <Label x:Name="ItemsCount"></Label>
             <ListView x:Name="ToDoItemsListView"></ListView>
         </StackPanel>
-        -->
+        
 
 
     </Grid>

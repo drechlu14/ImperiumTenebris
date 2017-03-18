@@ -104,11 +104,11 @@ namespace LightAndDark
                 Database.SaveItemAsync(boss);
             }
 
-            /*Info about database content
+            /*Info about database content*/
             var itemsFromDb = Database.GetItemsNotDoneAsync().Result;
             ItemsCount.Content = "Items in Database " + itemsFromDb.Count;
             ToDoItemsListView.ItemsSource = itemsFromDb;
-            */
+            
 
             //For showing information about player in the game
             var itemsFromDb1 = Database.GetItemsNotDoneAsyncCharCheck(check).Result;
@@ -145,6 +145,7 @@ namespace LightAndDark
         {
             if (Enemy01CheckLabel.Content.ToString() == "Night Lynx")
             {
+                //var getItemsFromDb = Database.GetItemsFromDatabase(ID).Result;
                 int enemycheck = 4;
                 var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
                 EnemyTextBlock01.DataContext = itemsFromDb1;
@@ -783,6 +784,7 @@ namespace LightAndDark
             AttackButton.Visibility = Visibility.Visible;
             ChargeButton.Visibility = Visibility.Visible;            
             NameTextBlock01.Visibility = Visibility.Visible;
+            EnemyTextBlock01.Visibility = Visibility.Visible;
             ActualStatusPlayer01HP.Visibility = Visibility.Visible;
             DivideStatusPlayer01HP.Visibility = Visibility.Visible;
             MaxStatusPlayer01HP.Visibility = Visibility.Visible;
@@ -805,6 +807,7 @@ namespace LightAndDark
             VictoryTextBlock.Visibility = Visibility.Hidden;
             LoseTextBlock.Visibility = Visibility.Hidden;
             NameTextBlock01.Visibility = Visibility.Hidden;
+            EnemyTextBlock01.Visibility = Visibility.Hidden;
             ActualStatusPlayer01HP.Visibility = Visibility.Hidden;
             DivideStatusPlayer01HP.Visibility = Visibility.Hidden;
             MaxStatusPlayer01HP.Visibility = Visibility.Hidden;
@@ -860,7 +863,8 @@ namespace LightAndDark
                                 int updateEnemyHP = (eHPstatus - progressBarValue);
                                 //Updating enemy content and saving changes to database
                                 ActualStatusEnemy01HP.Content = updateEnemyHP;
-                                Database.UpdateItems(updateEnemyHP);
+                                string enemyName = EnemyTextBlock01.Text;
+                                Database.UpdateItems(updateEnemyHP, enemyName);
                             });                        
 
                             //If player HP is higher than zero
@@ -880,7 +884,8 @@ namespace LightAndDark
                                     int updatePlayerHP = (pHPstatus - enemyAPstatus + randomNumber);
                                     //Updating player content and saving changes to database
                                     ActualStatusPlayer01HP.Content = updatePlayerHP;
-                                    Database.UpdateItems(updatePlayerHP);
+                                    string playerName = NameTextBlock01.Text;
+                                    Database.UpdateItems(updatePlayerHP, playerName);
                                 });
 
                             }

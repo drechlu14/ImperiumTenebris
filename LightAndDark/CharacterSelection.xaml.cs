@@ -114,7 +114,7 @@ namespace LightAndDark
         {
             int check = 2;
             itemsFromDbChar = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
-            if (NameChar03.Content.ToString() == "Calor")
+            if (NameChar02.Content.ToString() == "Calor")
             {
                 Map mapWindow = new Map(check);
                 mapWindow.Show();
