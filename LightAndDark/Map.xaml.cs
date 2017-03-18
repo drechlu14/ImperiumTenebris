@@ -26,7 +26,7 @@ namespace LightAndDark
     public partial class Map : Window
     {
         ObservableCollection<Statistics> itemsFromDbMap;
-        public int actualValue;
+        //public int progressBarValue;
         public int pHPstatus;
         public int eHPstatus;
         //private Statistics _player;
@@ -799,7 +799,7 @@ namespace LightAndDark
             var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
             await Task.Run(() =>
             {
-
+                Health();
                 for (int progressBarValue = 0; progressBarValue < 100; progressBarValue++)
                 {
                     if (progressBarValue >= 99)
@@ -810,14 +810,34 @@ namespace LightAndDark
 
                     if (AttackButtonWasClicked)
                     {
-                        
-                        ManualResetEvent mre = new ManualResetEvent(false);
+                        if (eHPstatus > 0)
+                        {
+                            //System.Windows.MessageBox.Show(actualValue.ToString());
+                            
+                            this.Dispatcher.Invoke(() =>
+                            {
+
+                                int updateEnemyHP = Math.Abs(eHPstatus - progressBarValue);
+                                ActualStatusEnemy01HP.Content = updateEnemyHP;
+                                Database.UpdateItems(updateEnemyHP);
+                            });
+                            
+                            
+                        }
+                        else
+                        {
+                            NextStageButton.Visibility = Visibility.Visible;
+                            VictoryTextBlock.Visibility = Visibility.Visible;
+                            //Show next stage button after win
+                            break;
+                        }
+
+                        /*ManualResetEvent mre = new ManualResetEvent(false);
                         mre.WaitOne();
                         actualValue = progressBarValue;
                         System.Windows.MessageBox.Show(actualValue.ToString());
                         //progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
-                        mre.Set();
-
+                        mre.Set();*/
                     }
 
 
@@ -825,9 +845,11 @@ namespace LightAndDark
                     Thread.Sleep(10);
                 }
 
-                   // Thread.Sleep(2000);
-                   // AutoClickFight_Click();   
-           });
+
+
+                // Thread.Sleep(2000);
+                // AutoClickFight_Click();   
+            });
         }
 
 
@@ -880,8 +902,10 @@ namespace LightAndDark
         {
             //System.Windows.MessageBox.Show(pHPstatus.ToString());
             //pHPstatus = Int32.Parse(Player01HP.Content.ToString());
-            var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);
-            pHPstatus = Int32.Parse(playerHPstatus);
+            this.Dispatcher.Invoke(() =>
+            {
+            var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);           
+            pHPstatus = Int32.Parse(playerHPstatus);         
             var playerAPstatus = Convert.ToString(Player01AP.Content);
             //var pAPstatus = ;
             ProgressBarPlayerHP.Maximum = pHPstatus;
@@ -892,20 +916,23 @@ namespace LightAndDark
             var enemyAPstatus = Convert.ToString(Enemy01AP.Content);
             //var eAPstatus = Int32.Parse(enemyAPstatus);
             ProgressBarEnemyHP.Maximum = eHPstatus;
+            });
         }
 
         private void AttackButton_Click(object sender, RoutedEventArgs e)
         {
             AttackButtonWasClicked = true;
 
-            Health();
+            //Health();
 
             int[] numbers = new int[16] { -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
             Random rd = new Random();
             int randomIndex = rd.Next(0, numbers.Length);
             int randomNumber = numbers[randomIndex];
 
-            if (eHPstatus > 0)
+
+
+            /*if (eHPstatus > 0)
             {
                 //System.Windows.MessageBox.Show(actualValue.ToString());
                 int updateEnemyHP = Math.Abs(eHPstatus - actualValue);
@@ -918,13 +945,13 @@ namespace LightAndDark
                 NextStageButton.Visibility = Visibility.Visible;
                 VictoryTextBlock.Visibility = Visibility.Visible;
                 //Show next stage button after win
-            }
+            }*/
 
             if (pHPstatus > 0)
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
 
-                int updatePlayerHP = Math.Abs(pHPstatus - actualValue - randomNumber);
+                int updatePlayerHP = Math.Abs(pHPstatus - /*progressBarValue*/ - randomNumber);
                 ActualStatusPlayer01HP.Content = updatePlayerHP;
                 Database.UpdateItems(updatePlayerHP);
 
