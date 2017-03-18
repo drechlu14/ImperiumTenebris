@@ -38,40 +38,76 @@ namespace LightAndDark
     
 
             itemsFromDbMap = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
-            for (int i = 0; i <= 1; i++)
+            if (itemsFromDbMap.Count < 12)
             {
-                if (itemsFromDbMap.Count < 4)
-                {
-                    Statistics enemy01 = new Statistics();
-                    enemy01.enemycheck = 1;
-                    enemy01.Name = "Night Lynx";
-                    enemy01.Type = "Shadow of Tenebris";
-                    enemy01.HP = 720;
-                    enemy01.AP = 80;
-                    Database.SaveItemAsync(enemy01);
+                Statistics enemy01 = new Statistics();
+                enemy01.Name = "Night Lynx";
+                enemy01.Type = "Shadow of Tenebris";
+                enemy01.HP = 720;
+                enemy01.AP = 60;
+                Database.SaveItemAsync(enemy01);
 
-                    Statistics enemy02 = new Statistics();
-                    enemy02.enemycheck = 2;
-                    enemy02.Name = "Blightseeker";
-                    enemy02.Type = "The Ancient Face";
-                    enemy02.HP = 1380;
-                    enemy02.AP = 70;
-                    Database.SaveItemAsync(enemy02);
+                Statistics enemy02 = new Statistics();
+                enemy02.Name = "Blightseeker";
+                enemy02.Type = "The Ancient Face";
+                enemy02.HP = 1380;
+                enemy02.AP = 70;
+                Database.SaveItemAsync(enemy02);
 
-                    Statistics enemy03 = new Statistics();
-                    enemy03.enemycheck = 3;
-                    enemy03.Name = "Vexspawn";
-                    enemy03.Type = "The Anguished Abnormality";
-                    enemy03.HP = 880;
-                    enemy03.AP = 60;
-                    Database.SaveItemAsync(enemy03);
-                }
+                Statistics enemy03 = new Statistics();
+                enemy03.Name = "Vexspawn";
+                enemy03.Type = "The Anguished";
+                enemy03.HP = 880;
+                enemy03.AP = 60;
+                Database.SaveItemAsync(enemy03);
+
+                Statistics enemy04 = new Statistics();
+                enemy04.Name = "Auramirage";
+                enemy04.Type = "The Nasty Anomaly";
+                enemy04.HP = 1100;
+                enemy04.AP = 65;
+                Database.SaveItemAsync(enemy04);
+
+                Statistics enemy05 = new Statistics();
+                enemy05.Name = "Spiritfoot";
+                enemy05.Type = "The Dirty Charmer";
+                enemy05.HP = 1600;
+                enemy05.AP = 80;
+                Database.SaveItemAsync(enemy05);
+
+                Statistics enemy06 = new Statistics();
+                enemy06.Name = "Grimesword";
+                enemy06.Type = "The Obsidian Killer";
+                enemy06.HP = 1370;
+                enemy06.AP = 75;
+                Database.SaveItemAsync(enemy06);
+
+                Statistics enemy07 = new Statistics();
+                enemy07.Name = "Abyssteeth";
+                enemy07.Type = "The Obsidian Killer";
+                enemy07.HP = 1280;
+                enemy07.AP = 90;
+                Database.SaveItemAsync(enemy07);
+
+                Statistics enemy08 = new Statistics();
+                enemy08.Name = "Metalghoul";
+                enemy08.Type = "The Deadly Horror";
+                enemy08.HP = 1520;
+                enemy08.AP = 80;
+                Database.SaveItemAsync(enemy08);
+
+                Statistics boss = new Statistics();
+                boss.Name = "Flamelich";
+                boss.Type = "The Parallel Deformity";
+                boss.HP = 3100;
+                boss.AP = 110;
+                Database.SaveItemAsync(boss);
             }
 
-            /*info about database content
+            /*info about database content*/
             var itemsFromDb = Database.GetItemsNotDoneAsync().Result;
             ItemsCount.Content = "Items in Database " + itemsFromDb.Count;
-            ToDoItemsListView.ItemsSource = itemsFromDb;*/
+            ToDoItemsListView.ItemsSource = itemsFromDb;
 
 
             var itemsFromDb1 = Database.GetItemsNotDoneAsyncCharCheck(check).Result;
@@ -94,26 +130,59 @@ namespace LightAndDark
             if (Enemy01CheckLabel.Content.ToString() == "Night Lynx")
             {
                 int enemycheck = 4;
-                var itemsFromDb2 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb2;
-                EnemyToolTip01.DataContext = itemsFromDb2;
-                Enemy01HP.DataContext = itemsFromDb2;
-                Enemy01AP.DataContext = itemsFromDb2;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb2;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb2;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
             }
             if (Enemy01CheckLabel.Content.ToString() == "Blightseeker")
             {
-                int enemycheck = 5;
-                var itemsFromDb3 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb3;
-                EnemyToolTip01.DataContext = itemsFromDb3;
-                Enemy01HP.DataContext = itemsFromDb3;
-                Enemy01AP.DataContext = itemsFromDb3;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb3;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb3;
+                int enemycheck = 6;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
             }
-                        
+            if (Enemy01CheckLabel.Content.ToString() == "Vexspawn")
+            {
+                int enemycheck = 5;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Auramirage")
+            {
+                int enemycheck = 7;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Spiritfoot")
+            {
+                int enemycheck = 8;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+            }
+
             //Health();
         }
 
@@ -142,7 +211,8 @@ namespace LightAndDark
                 " when suddenly a Tenebris engage you from the shadows." +
                 " Take this chance to try how powerful you are and kill one of them.";
             StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-            
+            Enemy01CheckLabel.Content = "Night Lynx";
+
             if (count == 2)
             {
                 count++;
@@ -220,6 +290,7 @@ namespace LightAndDark
                     "So far so good,.. at least I‘ve thought that, before that Tenebri just saw my light." +
                     " It looks like a very small and weak enemy, but I shouldn’t understimate it, let’s defeat it!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                Enemy01CheckLabel.Content = "Vexspawn";
             }
             if (count == 11)
             {
@@ -258,6 +329,7 @@ namespace LightAndDark
                 myBrush.ImageSource =
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01_light.jpg", UriKind.Absolute));
                 this.Background = myBrush;
+                Enemy01CheckLabel.Content = "Auramirage";
             }
             if (count == 14)
             {
@@ -301,6 +373,7 @@ namespace LightAndDark
                     " looks like he’s the leader of the weaker Forrest Tenebri. I can’t think any longer," +
                     " he’s coming this way and really fast!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                Enemy01CheckLabel.Content = "Spiritfoot";
             }
             if (count == 18)
             {
@@ -493,7 +566,7 @@ namespace LightAndDark
             {
                 StoryTextBlock.Text =
                     "I’m back here, really.. as I should be surprised by anything in this world. Now I see it clearly, both" +
-                    " towers are without lights. And.. was that here before? Lot of light in the center of Alman lake – Altar" +
+                    " towers are without lights. And.. was that here before? Lot of lights in the center of Alman lake – Altar" +
                     " or something like that. I’m sure that wasn’t there before.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
@@ -524,7 +597,7 @@ namespace LightAndDark
             }
             if (count == 35)
             {
-                count++;
+                //count++;
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight09Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -535,7 +608,7 @@ namespace LightAndDark
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_area.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
-            if (count == 36)
+            if (count == 37)
             {
                 FirstChoiceHopeButton.Visibility = Visibility.Visible;
                 SecondChoiceHopeButton.Visibility = Visibility.Visible;
@@ -629,12 +702,12 @@ namespace LightAndDark
         {
             FirstChoiceHopeButtonWasClicked = true;
             count++;
-            if (count == 37)
+            if (count == 36)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
-                FirstChoiceAreaButton.Visibility = Visibility.Hidden;
-                SecondChoiceAreaButton.Visibility = Visibility.Hidden;
+                FirstChoiceHopeButton.Visibility = Visibility.Hidden;
+                SecondChoiceHopeButton.Visibility = Visibility.Hidden;
                 StoryTextBlock.Text =
                     "What world would it be without me living in it? I’m sure my friends will be proud for me that I’ve defeated" +
                     " the Tenebri and once again saved the world from darkness. Now let’s use it for it’s purpose. LUCIFER LUX!";
@@ -646,12 +719,12 @@ namespace LightAndDark
         {
             SecondChoiceHopeButtonWasClicked = true;
             count++;
-            if (count == 37)
+            if (count == 36)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
-                FirstChoiceAreaButton.Visibility = Visibility.Hidden;
-                SecondChoiceAreaButton.Visibility = Visibility.Hidden;
+                FirstChoiceHopeButton.Visibility = Visibility.Hidden;
+                SecondChoiceHopeButton.Visibility = Visibility.Hidden;
                 StoryTextBlock.Text =
                     "What friend would I be if I can’t even show my friends this beautiful world again? The answer is clear, I’ve" +
                     " done my job, now it’s my turn to go to sleep. I’m giving this world to all of you.. REINCARNATION, ET LUMEN!";
