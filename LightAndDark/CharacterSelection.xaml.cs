@@ -20,6 +20,7 @@ namespace LightAndDark
     /// </summary>
     public partial class CharacterSelection : Window
     {
+        //Defining collections and public variable check, used for determining which character player choosed
         ObservableCollection<Statistics> itemsFromDb;
         ObservableCollection<Statistics> itemsFromDbChar;
         public int check;
@@ -29,17 +30,18 @@ namespace LightAndDark
             InitializeComponent();
 
             itemsFromDb = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
+            //For cycle to prevent bugs
             for (int i = 0; i <= 2; i++)
             {
+                //Adding playable characters to database
                 if (itemsFromDb.Count < 3)
                 {
-
                     Statistics player01 = new Statistics();
                     player01.ID = 1;
                     player01.check = 1;
                     player01.Name = "Lumen";
                     player01.Type = "The White Light";
-                    player01.HP = 1800;
+                    player01.HP = 2400;
                     player01.AP = 170;
                     Database.SaveItemAsync(player01);
 
@@ -48,21 +50,21 @@ namespace LightAndDark
                     player02.check = 2;
                     player02.Name = "Carol";
                     player02.Type = "Shiny Bullet";
-                    player02.HP = 1500;
-                    player02.AP = 200;
+                    player02.HP = 1900;
+                    player02.AP = 220;
                     Database.SaveItemAsync(player02);
 
                     Statistics player03 = new Statistics();
                     player01.check = 3;
                     player03.Name = "Sheen";
                     player03.Type = "Angel of Justice";
-                    player03.HP = 1700;
-                    player03.AP = 160;
+                    player03.HP = 2200;
+                    player03.AP = 190;
                     Database.SaveItemAsync(player03);
-
                 }
             }
 
+            //Showing results from database
             var itemsFromDb1 = Database.GetItemsNotDoneAsync1().Result;
             ToolTipChar01.DataContext = itemsFromDb1;
             NameChar01.DataContext = itemsFromDb1;
@@ -74,7 +76,7 @@ namespace LightAndDark
             NameChar03.DataContext = itemsFromDb3;
         }
 
-
+        //Going back to menu
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
@@ -82,6 +84,7 @@ namespace LightAndDark
             this.Close();
         }
 
+        //Button for creating character Lumen
         private void Char01Button_Click(object sender, RoutedEventArgs e)
         {
             /*int check = 1;
@@ -95,6 +98,7 @@ namespace LightAndDark
                     this.Close();
                 }
             }*/
+            //Set check value to 1, compare it with ID, send it and change to Map window
             int check = 1;
             itemsFromDbChar = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             if (NameChar01.Content.ToString() == "Lumen")
@@ -106,26 +110,22 @@ namespace LightAndDark
 
         }
 
+        private void Char02Button_Click(object sender, RoutedEventArgs e)
+        {
+            int check = 2;
+            itemsFromDbChar = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
+            if (NameChar03.Content.ToString() == "Calor")
+            {
+                Map mapWindow = new Map(check);
+                mapWindow.Show();
+                this.Close();
+            }
+        }
+
         private void Char03Button_Click(object sender, RoutedEventArgs e)
         {
-            /*if (Name == "Sheen")
-            {
-                string Name01 = Convert.ToString(NameChar03.Content);
-            }*/
-
-            /*int check = 2;
-            List<Statistics> items = Database.GetItemsNotDoneAsyncCheck1(check).Result;
-            if (items != null)
-            {
-                if (items.Count > 0)
-                {
-                    Map mapWindow = new Map(items[1]);
-                    mapWindow.Show();
-                    this.Close();
-                }
-            }*/
             int check = 3;
-            
+            itemsFromDbChar = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             if (NameChar03.Content.ToString() == "Sheen")
             {
                 Map mapWindow = new Map(check);
@@ -134,6 +134,7 @@ namespace LightAndDark
             }
         }
 
+        //Database connect
         private static StatisticsDatabase _database;
         public static StatisticsDatabase Database
         {

@@ -27,16 +27,16 @@ namespace LightAndDark
     {
         ObservableCollection<Statistics> itemsFromDbMap;
         //public int progressBarValue;
+        public int playerAPstatus;
+        public int enemyAPstatus;
         public int pHPstatus;
         public int eHPstatus;
-        //private Statistics _player;
-        //private Statistics _enemy;
 
         public Map(int check)
         {          
             InitializeComponent();
-    
-
+            
+            //Adding enemies to database
             itemsFromDbMap = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             if (itemsFromDbMap.Count < 12)
             {
@@ -104,12 +104,13 @@ namespace LightAndDark
                 Database.SaveItemAsync(boss);
             }
 
-            /*info about database content*/
+            /*Info about database content
             var itemsFromDb = Database.GetItemsNotDoneAsync().Result;
             ItemsCount.Content = "Items in Database " + itemsFromDb.Count;
             ToDoItemsListView.ItemsSource = itemsFromDb;
+            */
 
-
+            //For showing information about player in the game
             var itemsFromDb1 = Database.GetItemsNotDoneAsyncCharCheck(check).Result;
             NameTextBlock01.DataContext = itemsFromDb1;
             ToolTipChar01.DataContext = itemsFromDb1;
@@ -119,13 +120,27 @@ namespace LightAndDark
             ActualStatusPlayer01HP.DataContext = itemsFromDb1;
             ProgressBarPlayerHP.DataContext = itemsFromDb1;
 
+            //Changing player background on selected character
+            if (NameTextBlock01.Text == "Calor")
+            {
+                ImageChar01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/light_char_02.jpg"));
+            }
+            if (NameTextBlock01.Text == "Sheen")
+            {
+                ImageChar01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/light_char_03.jpg"));
+            }
+
+
+            //Calling method Creation() for showing enemies
             Creation();
             
+            //MessageBox for variable check
             /*System.Windows.MessageBox.Show(check.ToString());*/
 
 
         }
 
+        //Method Creation() with all enemies and conditions how to distinguish them in each battle by their names
         private void Creation()
         {
             if (Enemy01CheckLabel.Content.ToString() == "Night Lynx")
@@ -188,10 +203,9 @@ namespace LightAndDark
                 ActualStatusEnemy01HP.DataContext = itemsFromDb1;
                 ProgressBarEnemyHP.DataContext = itemsFromDb1;
             }
-
-            //Health();
         }
 
+        //Database connection
         private static StatisticsDatabase _database;
         public static StatisticsDatabase Database
         {
@@ -206,35 +220,41 @@ namespace LightAndDark
             }
         }
 
-
+        //Setting count to default value zero
         int count = 0;
 
+        //Next button used in storyline, it displays main line of the game, where the player progresses
+        //Concept is to add count in every new click - storytext X battle
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            //Count add +1
             count++;
+            //Storytext
             StoryTextBlock.Text =
                 "Prologue: You're coming closer to the Alman lake" +
                 " when suddenly a Tenebris engage you from the shadows." +
                 " Take this chance to try how powerful you are and kill one of them.";
             StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            //In next count, there will be a battle with this enemy, it's used for the previous check
             Enemy01CheckLabel.Content = "Night Lynx";
+            Creation();
 
             if (count == 2)
             {
                 count++;
+                //Disable storytext, enable button for the battle start
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight01Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
             }
             if (count == 3)
-            {
+            {               
                 StoryTextBlock.Text =
                     "It looks like my first enemy is defeated, I don't wanna see them anymore!" +
                     " It was an easy fight,.. but truly, I know that this was just" +
                     " one of the weak Tenebri. So in the end I'll have to fight with" +
                     " much stronger enemies. For now on I have to move on";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-                //System.Windows.MessageBox.Show(count.ToString());
             }
             if (count == 4)
             {
@@ -253,6 +273,7 @@ namespace LightAndDark
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight02Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
+                //Changing enemy pic for next battle
                 Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
             }
             if (count == 6)
@@ -285,6 +306,7 @@ namespace LightAndDark
                     " Forrest first and then as quickly as possible go near the shore, where I’ll be safer.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
+                //Changing background area
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01.jpg", UriKind.Absolute));
@@ -297,6 +319,7 @@ namespace LightAndDark
                     " It looks like a very small and weak enemy, but I shouldn’t understimate it, let’s defeat it!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
                 Enemy01CheckLabel.Content = "Vexspawn";
+                Creation();
             }
             if (count == 11)
             {
@@ -336,6 +359,7 @@ namespace LightAndDark
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01_light.jpg", UriKind.Absolute));
                 this.Background = myBrush;
                 Enemy01CheckLabel.Content = "Auramirage";
+                Creation();
             }
             if (count == 14)
             {
@@ -455,6 +479,8 @@ namespace LightAndDark
             }
             if (count == 27)
             {
+                //This is the place where storyline divide into two ways, these two conditions displays each of the ways
+                //First choice
                 if (FirstChoiceAreaButtonWasClicked)
                 {
                     StoryTextBlock.Text =
@@ -469,13 +495,13 @@ namespace LightAndDark
                     this.Background = myBrush;
                 }
 
+                //Second choice
                 if (SecondChoiceAreaButtonWasClicked)
                 {
                     StoryTextBlock.Text =
                         "The climate is drasticaly changing on my way to the second tower, it’s much colder here." +
-                        " Also the landscape, from forrest plains to mountains. I haven’t seen any Temebri so far, I" +
-                        " don’t know if I should be happy about that. I just have to be caraful, who knows what kind" +
-                        " of darkness can hide in these conditions.";
+                        " Also I haven’t seen any Temebri so far, I don’t know if I should be happy about that. I" +
+                        " just have to be caraful, who knows what kind of darkness can hide in these conditions.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
                     ImageBrush myBrush = new ImageBrush();
@@ -570,6 +596,7 @@ namespace LightAndDark
             }
             if (count == 32)
             {
+                //Storyline is connected into one
                 StoryTextBlock.Text =
                     "I’m back here, really.. as I should be surprised by anything in this world. Now I see it clearly, both" +
                     " towers are without lights. And.. was that here before? Lot of lights in the center of Alman lake – Altar" +
@@ -614,7 +641,7 @@ namespace LightAndDark
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_area.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
-            if (count == 37)
+            if (count == 36)
             {
                 FirstChoiceHopeButton.Visibility = Visibility.Visible;
                 SecondChoiceHopeButton.Visibility = Visibility.Visible;
@@ -633,6 +660,7 @@ namespace LightAndDark
             }
             if (count == 38)
             {
+                //Two choices for player in the ending
                 if (FirstChoiceHopeButtonWasClicked || SecondChoiceHopeButtonWasClicked)
                 {
                     StoryTextBlock.Text =
@@ -660,6 +688,7 @@ namespace LightAndDark
             }
             if (count == 40)
             {
+                //Game is completed, going back to menu
                 MainWindow selectionWindow = new MainWindow();
                 selectionWindow.Show();
                 this.Close();
@@ -667,14 +696,19 @@ namespace LightAndDark
 
         }
 
+        //Defining bools to check if player clicked on button
         private bool FirstChoiceAreaButtonWasClicked = false;
         private bool SecondChoiceAreaButtonWasClicked = false;
         private bool FirstChoiceHopeButtonWasClicked = false;
         private bool SecondChoiceHopeButtonWasClicked = false;
+        private bool AttackButtonWasClicked = false;
 
+        //Button for first choice in the storyline ways
         private void FirstChoiceAreaButton_Click(object sender, RoutedEventArgs e)
         {
+            //Button was clicked, setting boolean to true
             FirstChoiceAreaButtonWasClicked = true;
+            //Also using count, to continue in the storyline
             count++;
             if (count == 26)
             {
@@ -688,6 +722,7 @@ namespace LightAndDark
             }
         }
 
+        //Button for second choice in the storyline ways
         private void SecondChoiceAreaButton_Click(object sender, RoutedEventArgs e)
         {
             SecondChoiceAreaButtonWasClicked = true;
@@ -704,11 +739,12 @@ namespace LightAndDark
             }
         }
 
+        //Button for first choice in the storyline ending
         private void FirstChoiceHopeButton_Click(object sender, RoutedEventArgs e)
         {
             FirstChoiceHopeButtonWasClicked = true;
             count++;
-            if (count == 36)
+            if (count == 37)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
@@ -721,11 +757,12 @@ namespace LightAndDark
             }
         }
 
+        //Button for second choice in the storyline ending
         private void SecondChoiceHopeButton_Click(object sender, RoutedEventArgs e)
         {
             SecondChoiceHopeButtonWasClicked = true;
             count++;
-            if (count == 36)
+            if (count == 37)
             {
                 StoryLabel.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Visible;
@@ -738,6 +775,7 @@ namespace LightAndDark
             }
         }
 
+        //Method ShowFight(), it's used when the fight started, to change storytext for all battle mechanics
         private void ShowFight()
         {
             ImageChar01.Visibility = Visibility.Visible;
@@ -756,104 +794,115 @@ namespace LightAndDark
             ProgressBarEnemyHP.Visibility = Visibility.Visible;
         }
 
-        private void Fight01Button_Click(object sender, RoutedEventArgs e)
+        //Button for entering next stage after fight to change battle mechanics for storytext
+        private void NextStageButton_Click(object sender, RoutedEventArgs e)
         {
-            //přidat async (u void)
-            ShowFight();
-            Fight01Button.Visibility = Visibility.Hidden;
-
-            /*AttackButtonWasClicked = false;
-
-            var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
-            await Task.Run(() =>
-            {
-
-                for (int i = 0; i < 100; i++)
-                {
-                    if (i >= 99)
-                    {
-                        i = 0;
-                    }
-
-                    if (AttackButtonWasClicked)
-                    {
-                        ManualResetEvent mre = new ManualResetEvent(false);
-                        mre.WaitOne();
-                        //progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
-                        mre.Set();
-                    }
-
-                    ((IProgress<int>)progress).Report(i);
-                    Thread.Sleep(10);
-                }
-
-                // Thread.Sleep(2000);
-                // AutoClickFight_Click();   
-            });*/
+            ImageChar01.Visibility = Visibility.Hidden;
+            Enemy01.Visibility = Visibility.Hidden;
+            AttackButton.Visibility = Visibility.Hidden;
+            ChargeButton.Visibility = Visibility.Hidden;
+            NextStageButton.Visibility = Visibility.Hidden;
+            VictoryTextBlock.Visibility = Visibility.Hidden;
+            LoseTextBlock.Visibility = Visibility.Hidden;
+            NameTextBlock01.Visibility = Visibility.Hidden;
+            ActualStatusPlayer01HP.Visibility = Visibility.Hidden;
+            DivideStatusPlayer01HP.Visibility = Visibility.Hidden;
+            MaxStatusPlayer01HP.Visibility = Visibility.Hidden;
+            ActualStatusEnemy01HP.Visibility = Visibility.Hidden;
+            DivideStatusEnemy01HP.Visibility = Visibility.Hidden;
+            MaxStatusEnemy01HP.Visibility = Visibility.Hidden;
+            StoryLabel.Visibility = Visibility.Visible;
+            NextButton.Visibility = Visibility.Visible;
+            ProgressBarLoop.Visibility = Visibility.Hidden;
+            ProgressBarPlayerHP.Visibility = Visibility.Hidden;
+            ProgressBarEnemyHP.Visibility = Visibility.Hidden;
         }
 
+        //Button for charging an attack in the battle
         private async void ChargeButton_Click(object sender, RoutedEventArgs e)
         {
             AttackButtonWasClicked = false;
 
+            //Setting variable progress for running progress bar with task run
             var progress = new Progress<int>(value => ProgressBarLoop.Value = value);
             await Task.Run(() =>
             {
+                //Calling method Health() for variables
                 Health();
-                for (int progressBarValue = 0; progressBarValue < 100; progressBarValue++)
+
+                //Magic line of code for updating UI elements
+                this.Dispatcher.Invoke(() =>
                 {
-                    if (progressBarValue >= 99)
+                    //Content with player and enemy AP, adding it into public variables
+                    playerAPstatus = Int32.Parse(Player01AP.Content.ToString());
+                    enemyAPstatus = Int32.Parse(Enemy01AP.Content.ToString());
+                });
+
+                //For cycle for infinite running progress bar, with max value as player AP
+                for (int progressBarValue = 0; progressBarValue < playerAPstatus + 1; progressBarValue++)
+                {
+                    //Condition if the progress bar reaches end, start again from zero
+                    if (progressBarValue >= playerAPstatus)
                     {
                         progressBarValue = 0;
-
                     }
 
+                    //If player clicked on attack button
                     if (AttackButtonWasClicked)
                     {
+                        //If enemy HP is higher than zero
                         if (eHPstatus > 0)
                         {
-                            //System.Windows.MessageBox.Show(actualValue.ToString());
-                            
+
                             this.Dispatcher.Invoke(() =>
                             {
-
-                                int updateEnemyHP = Math.Abs(eHPstatus - progressBarValue);
+                                //Add to variable enemy HP minus progress bar value, which equals to what player charged on his AP value
+                                int updateEnemyHP = (eHPstatus - progressBarValue);
+                                //Updating enemy content and saving changes to database
                                 ActualStatusEnemy01HP.Content = updateEnemyHP;
                                 Database.UpdateItems(updateEnemyHP);
-                            });
-                            
-                            
-                        }
-                        else
-                        {
-                            NextStageButton.Visibility = Visibility.Visible;
-                            VictoryTextBlock.Visibility = Visibility.Visible;
-                            //Show next stage button after win
+                            });                        
+
+                            //If player HP is higher than zero
+                            if (pHPstatus > 0)
+                            {
+                                //Little delay for enemy attack
+                                Thread.Sleep(500);
+
+                                int[] numbers = new int[11] { -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0 };
+                                Random rd = new Random();
+                                int randomIndex = rd.Next(0, numbers.Length);
+                                int randomNumber = numbers[randomIndex];
+
+                                this.Dispatcher.Invoke(() =>
+                                {
+                                    //Add to variable player HP minus enemy AP value + some randomize elements
+                                    int updatePlayerHP = (pHPstatus - enemyAPstatus + randomNumber);
+                                    //Updating player content and saving changes to database
+                                    ActualStatusPlayer01HP.Content = updatePlayerHP;
+                                    Database.UpdateItems(updatePlayerHP);
+                                });
+
+                            }
                             break;
                         }
+                    }                   
 
-                        /*ManualResetEvent mre = new ManualResetEvent(false);
-                        mre.WaitOne();
-                        actualValue = progressBarValue;
-                        System.Windows.MessageBox.Show(actualValue.ToString());
-                        //progressBarValue = Int32.Parse(ProgressBarLoop.Value.ToString());
-                        mre.Set();*/
-                    }
-
-
+                    //Actual running progress bar with its speed
                     ((IProgress<int>)progress).Report(progressBarValue);
-                    Thread.Sleep(10);
-                }
-
-
-
-                // Thread.Sleep(2000);
-                // AutoClickFight_Click();   
+                    Thread.Sleep(5);
+                }              
             });
+            //Calling method Health() for battle ending conditions
+            Health();
         }
 
-
-
+        //All battle entering buttons, their separated because each is used in different place with each meaning (they're also placed in game different)
+        private void Fight01Button_Click(object sender, RoutedEventArgs e)
+        {
+            ShowFight();
+            Fight01Button.Visibility = Visibility.Hidden;
+        }
         private void Fight02Button_Click(object sender, RoutedEventArgs e)
         {
             ShowFight();
@@ -893,103 +942,51 @@ namespace LightAndDark
         {
             ShowFight();
             Fight09Button.Visibility = Visibility.Hidden;
-        }
+        }        
 
-
-        private bool AttackButtonWasClicked = false;
-
+        //Method Health() with HP, AP definition and battle end conditions
         private void Health()
         {
-            //System.Windows.MessageBox.Show(pHPstatus.ToString());
             //pHPstatus = Int32.Parse(Player01HP.Content.ToString());
             this.Dispatcher.Invoke(() =>
             {
-            var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);           
-            pHPstatus = Int32.Parse(playerHPstatus);         
-            var playerAPstatus = Convert.ToString(Player01AP.Content);
-            //var pAPstatus = ;
-            ProgressBarPlayerHP.Maximum = pHPstatus;
+                var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);           
+                pHPstatus = Int32.Parse(playerHPstatus);         
+                ProgressBarPlayerHP.Maximum = pHPstatus;
 
 
-            var enemyHPstatus = Convert.ToString(ActualStatusEnemy01HP.Content);
-            eHPstatus = Int32.Parse(enemyHPstatus);
-            var enemyAPstatus = Convert.ToString(Enemy01AP.Content);
-            //var eAPstatus = Int32.Parse(enemyAPstatus);
-            ProgressBarEnemyHP.Maximum = eHPstatus;
+                var enemyHPstatus = Convert.ToString(ActualStatusEnemy01HP.Content);
+                eHPstatus = Int32.Parse(enemyHPstatus);
+                ProgressBarEnemyHP.Maximum = eHPstatus;
             });
+
+            //If enemy HP is less then zero show next stage button, player is winner
+            if (eHPstatus <= 0)
+            {
+                NextStageButton.Visibility = Visibility.Visible;
+                VictoryTextBlock.Visibility = Visibility.Visible;
+                AttackButton.Visibility = Visibility.Hidden;
+                ChargeButton.Visibility = Visibility.Hidden;               
+            }
+            //If player HP is less then zero show lose button, player is loser
+            if (pHPstatus <= 0)
+            {
+                LoseButton.Visibility = Visibility.Visible;
+                LoseTextBlock.Visibility = Visibility.Visible;
+                AttackButton.Visibility = Visibility.Hidden;
+                ChargeButton.Visibility = Visibility.Hidden;
+            }
         }
 
+        //Button used for attacking, basicaly used for purpose of charge button
         private void AttackButton_Click(object sender, RoutedEventArgs e)
         {
             AttackButtonWasClicked = true;
 
-            //Health();
-
-            int[] numbers = new int[16] { -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-            Random rd = new Random();
-            int randomIndex = rd.Next(0, numbers.Length);
-            int randomNumber = numbers[randomIndex];
-
-
-
-            /*if (eHPstatus > 0)
-            {
-                //System.Windows.MessageBox.Show(actualValue.ToString());
-                int updateEnemyHP = Math.Abs(eHPstatus - actualValue);
-                ActualStatusEnemy01HP.Content = updateEnemyHP;
-                Database.UpdateItems(updateEnemyHP);
-                
-            }
-            else
-            {
-                NextStageButton.Visibility = Visibility.Visible;
-                VictoryTextBlock.Visibility = Visibility.Visible;
-                //Show next stage button after win
-            }*/
-
-            if (pHPstatus > 0)
-            {
-                Thread.Sleep(1000);
-
-                int updatePlayerHP = Math.Abs(pHPstatus - /*progressBarValue*/ - randomNumber);
-                ActualStatusPlayer01HP.Content = updatePlayerHP;
-                Database.UpdateItems(updatePlayerHP);
-
-            }
-            else
-            {
-                LoseButton.Visibility = Visibility.Visible;
-                LoseTextBlock.Visibility = Visibility.Visible;
-                //Show losser button after lose
-            }
-
-                //PlayerUpdate01HP.Content = updateEnemyHP;
-                //System.Windows.MessageBox.Show(updateEnemyHP.ToString());
-
-
+            Health();
         }
-        private void NextStageButton_Click(object sender, RoutedEventArgs e)
-        {
-            ImageChar01.Visibility = Visibility.Hidden;
-            Enemy01.Visibility = Visibility.Hidden;
-            AttackButton.Visibility = Visibility.Hidden;
-            ChargeButton.Visibility = Visibility.Hidden;
-            NextStageButton.Visibility = Visibility.Hidden;
-            VictoryTextBlock.Visibility = Visibility.Hidden;
-            LoseTextBlock.Visibility = Visibility.Hidden;
-            NameTextBlock01.Visibility = Visibility.Hidden;
-            ActualStatusPlayer01HP.Visibility = Visibility.Hidden;
-            DivideStatusPlayer01HP.Visibility = Visibility.Hidden;
-            MaxStatusPlayer01HP.Visibility = Visibility.Hidden;
-            ActualStatusEnemy01HP.Visibility = Visibility.Hidden;
-            DivideStatusEnemy01HP.Visibility = Visibility.Hidden;
-            MaxStatusEnemy01HP.Visibility = Visibility.Hidden;
-            StoryLabel.Visibility = Visibility.Visible;
-            NextButton.Visibility = Visibility.Visible;
-            ProgressBarLoop.Visibility = Visibility.Hidden;
-            ProgressBarPlayerHP.Visibility = Visibility.Hidden;
-            ProgressBarEnemyHP.Visibility = Visibility.Hidden;
-        }
+
+        //Lose button sends player back to menu
         private void LoseButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow selectionWindow = new MainWindow();

@@ -109,9 +109,6 @@
             </Button.Effect>
         </Button>
 
-
-
-
         <Image x:Name="ImageChar02" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image.Source>
                 <BitmapImage UriSource="https://student.sps-prosek.cz/~drechlu14/pics/light_char_02.jpg" />
@@ -140,7 +137,7 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="NameChar02" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" Content="{Binding Name}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="102" >
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="NameChar02" Click="Char02Button_Click" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" Content="{Binding Name}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="102" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

@@ -130,7 +130,7 @@
                                         <TextBlock x:Name="StatisticsTextBlock" TextAlignment="Left" TextWrapping="WrapWithOverflow" FontFamily="Perpetua" FontWeight="Normal" FontSize="80" >
                                             <Run Text="Title:"/>
                                             <Run Text="{Binding Type}"/>
-                                            <Run Text="Light points: "/>
+                                            <Run Text="Max. light points: "/>
                                             <Run Text="{Binding HP}"/>
                                             <Run Text="  "/>
                                             <Run Text="Attack Power:"/>
@@ -144,12 +144,12 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <ProgressBar Visibility="Hidden" x:Name="ProgressBarPlayerHP" Value="{Binding HP}" Maximum="100" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Height="49" Margin="100,991,0,0" VerticalAlignment="Top" Width="453" Foreground="LightSkyBlue" />
-        <Label Visibility="Hidden" x:Name="ActualStatusPlayer01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="72,981,1665,10" />
-        <Label Visibility="Hidden" x:Name="DivideStatusPlayer01HP" Content=" / " HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="255,981,1581,10" />
-        <Label Visibility="Hidden" x:Name="MaxStatusPlayer01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="311,981,1331,10" />
+        <ProgressBar Visibility="Hidden" x:Name="ProgressBarPlayerHP" Value="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Height="48" Margin="100,991,0,0" VerticalAlignment="Top" Width="453" Foreground="#99CFE0" />
+        <Label Visibility="Hidden" x:Name="ActualStatusPlayer01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="48" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="130,972,1665,10" />
+        <Label Visibility="Hidden" x:Name="DivideStatusPlayer01HP" Content=" / " HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="48" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="290,972,1581,10" />
+        <Label Visibility="Hidden" x:Name="MaxStatusPlayer01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="48" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="322,972,1331,10" />
 
-        <ProgressBar Visibility="Hidden" x:Name="ProgressBarLoop" HorizontalAlignment="Left" Height="38" Margin="757,992,0,0" VerticalAlignment="Top" Width="453" Foreground="#FFFF4C"/>
+        <ProgressBar Visibility="Hidden" x:Name="ProgressBarLoop" HorizontalAlignment="Left" Height="38" Margin="730,992,0,0" VerticalAlignment="Top" Width="453" Foreground="#FFFF4C"/>
 
         <Label Visibility="Hidden" x:Name="Enemy01CheckLabel" Content="Night Lynx" />
         <Label Visibility="Hidden" x:Name="Enemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" />
@@ -171,7 +171,7 @@
                                         <TextBlock x:Name="StatisticsTextBlock" TextAlignment="Left" TextWrapping="WrapWithOverflow" FontFamily="Perpetua" FontWeight="Normal" FontSize="80" >
                                             <Run Text="Title:"/>
                                             <Run Text="{Binding Type}"/>
-                                            <Run Text="Light points: "/>
+                                            <Run Text="Max. light points: "/>
                                             <Run Text="{Binding HP}"/>
                                             <Run Text="  "/>
                                             <Run Text="Attack Power:"/>
@@ -185,10 +185,10 @@
                 </ToolTip>
             </Image.ToolTip>
         </Image>
-        <ProgressBar Visibility="Hidden" x:Name="ProgressBarEnemyHP" Value="{Binding HP}" Maximum="100" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Height="49" Margin="1367,991,0,0" VerticalAlignment="Top" Width="453" Foreground="LightCoral"/>
-        <Label Visibility="Hidden" x:Name="ActualStatusEnemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1341,981,396,10" />
-        <Label Visibility="Hidden" x:Name="DivideStatusEnemy01HP" Content=" / " HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1529,981,307,10" />
-        <Label Visibility="Hidden" x:Name="MaxStatusEnemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1587,981,55,10" />
+        <ProgressBar Visibility="Hidden" x:Name="ProgressBarEnemyHP" Value="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Left" Height="48" Margin="1367,991,0,0" VerticalAlignment="Top" Width="453" Foreground="#B20000"/>
+        <Label Visibility="Hidden" x:Name="ActualStatusEnemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="48" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1400,972,396,10" />
+        <Label Visibility="Hidden" x:Name="DivideStatusEnemy01HP" Content=" / " HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="48" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1560,972,307,10" />
+        <Label Visibility="Hidden" x:Name="MaxStatusEnemy01HP" Content="{Binding HP}" DataContext="{Binding DataContext,RelativeSource={RelativeSource AncestorType=Window}}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="48" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" Margin="1587,972,55,10" />
 
         <Label x:Name="PlayerUpdate01HP" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="452" Height="106" FontSize="80" FontFamily="Perpetua" Foreground="white" FontWeight="Bold" RenderTransformOrigin="0.517,-4.273" Margin="710,559,758,415" />
         <Label Visibility="Hidden" x:Name="HoldHelp" Content="(Click to attack an enemy.)" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Width="700" FontSize="34" FontFamily="Perpetua" Foreground="white" FontWeight="Bold" RenderTransformOrigin="0.517,-4.273" Margin="613,351,607,685" />
@@ -207,7 +207,7 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Visibility="Hidden" x:Name="LoseButton" Click="LoseButton_Click" Content="Back to menu" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" Margin="710,831,710,0" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
+        <Button Visibility="Hidden" x:Name="LoseButton" Click="LoseButton_Click" Content="Game over" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="500" Margin="710,831,710,0" FontFamily="Trajan Pro" FontWeight="Bold" Foreground="white" FontSize="72" Background="#050909" BorderThickness="5" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -241,12 +241,12 @@
             </Button.Effect>
         </Button>
 
-        <!-- info about database content -->
+        <!-- info about database content 
         <StackPanel>
             <Label x:Name="ItemsCount"></Label>
             <ListView x:Name="ToDoItemsListView"></ListView>
         </StackPanel>
-        
+        -->
 
 
     </Grid>
