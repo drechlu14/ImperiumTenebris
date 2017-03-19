@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +27,6 @@ namespace LightAndDark
     public partial class Map : Window
     {
         ObservableCollection<Statistics> itemsFromDbMap;
-        //public int progressBarValue;
         public int playerAPstatus;
         public int enemyAPstatus;
         public int pHPstatus;
@@ -35,97 +35,94 @@ namespace LightAndDark
         public Map(int check)
         {          
             InitializeComponent();
-            
+
+            SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Track04.wav");
+            player.Load();
+            player.Play();
+
             //Adding enemies to database
             itemsFromDbMap = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
-            if (itemsFromDbMap.Count < 4)
+            if (itemsFromDbMap.Count < 12)
             {
                 Statistics enemy01 = new Statistics();
                 enemy01.Name = "Night Lynx";
                 enemy01.Type = "Shadow of Tenebris";
                 enemy01.HP = 720;
-                enemy01.AP = 60;
+                enemy01.AP = 55;
+                enemy01.checkID = 4;
                 Database.SaveItemAsync(enemy01);
-            }
-            if (itemsFromDbMap.Count < 5)
-            {
+
                 Statistics enemy02 = new Statistics();
-                enemy02.Name = "Vexspawn";
-                enemy02.Type = "The Anguished";
-                enemy02.HP = 880;
-                enemy02.AP = 60;
+                enemy02.Name = "Blightseeker";
+                enemy02.Type = "The Ancient Face";
+                enemy02.HP = 1280;
+                enemy02.AP = 70;
+                enemy02.checkID = 5;
                 Database.SaveItemAsync(enemy02);
-            }
-            if (itemsFromDbMap.Count < 6)
-            {
+
                 Statistics enemy03 = new Statistics();
-                enemy03.Name = "Blightseeker";
-                enemy03.Type = "The Ancient Face";
-                enemy03.HP = 1380;
-                enemy03.AP = 70;
+                enemy03.Name = "Vexspawn";
+                enemy03.Type = "The Anguished";
+                enemy03.HP = 880;
+                enemy03.AP = 60;
+                enemy03.checkID = 6;
                 Database.SaveItemAsync(enemy03);
-            }
-            if (itemsFromDbMap.Count < 7)
-            {
+
                 Statistics enemy04 = new Statistics();
                 enemy04.Name = "Auramirage";
                 enemy04.Type = "The Nasty Anomaly";
-                enemy04.HP = 1100;
+                enemy04.HP = 1030;
                 enemy04.AP = 65;
+                enemy04.checkID = 7;
                 Database.SaveItemAsync(enemy04);
-            }
-            if (itemsFromDbMap.Count < 8)
-            {
+
                 Statistics enemy05 = new Statistics();
                 enemy05.Name = "Spiritfoot";
                 enemy05.Type = "The Dirty Charmer";
-                enemy05.HP = 1600;
+                enemy05.HP = 1500;
                 enemy05.AP = 80;
+                enemy05.checkID = 8;
                 Database.SaveItemAsync(enemy05);
-            }
-            if (itemsFromDbMap.Count < 9)
-            {
+
                 Statistics enemy06 = new Statistics();
                 enemy06.Name = "Grimesword";
                 enemy06.Type = "The Obsidian Killer";
-                enemy06.HP = 1370;
+                enemy06.HP = 1310;
                 enemy06.AP = 75;
+                enemy06.checkID = 9;
                 Database.SaveItemAsync(enemy06);
-            }
-            if (itemsFromDbMap.Count < 10)
-            {
+
                 Statistics enemy07 = new Statistics();
                 enemy07.Name = "Abyssteeth";
-                enemy07.Type = "The Obsidian Killer";
-                enemy07.HP = 1280;
-                enemy07.AP = 90;
+                enemy07.Type = "The Dreadbrood";
+                enemy07.HP = 1300;
+                enemy07.AP = 85;
+                enemy07.checkID = 10;
                 Database.SaveItemAsync(enemy07);
-            }
-            if (itemsFromDbMap.Count < 11)
-            {
+
                 Statistics enemy08 = new Statistics();
                 enemy08.Name = "Metalghoul";
                 enemy08.Type = "The Deadly Horror";
-                enemy08.HP = 1520;
+                enemy08.HP = 1420;
                 enemy08.AP = 80;
+                enemy08.checkID = 11;
                 Database.SaveItemAsync(enemy08);
-            }
-            if (itemsFromDbMap.Count < 12)
-            {
+
                 Statistics boss = new Statistics();
                 boss.Name = "Flamelich";
                 boss.Type = "The Parallel Deformity";
-                boss.HP = 3100;
+                boss.HP = 2100;
                 boss.AP = 110;
+                boss.checkID = 12;
                 Database.SaveItemAsync(boss);
             }
 
             /*
-             * Info about database content*/
+             * Info about database content
             var itemsFromDb = Database.GetItemsNotDoneAsync().Result;
             ItemsCount.Content = "Items in Database " + itemsFromDb.Count;
             ToDoItemsListView.ItemsSource = itemsFromDb;
-            
+            */
 
             //For showing information about player in the game
             var itemsFromDb1 = Database.GetItemsNotDoneAsyncCharCheck(check).Result;
@@ -136,6 +133,8 @@ namespace LightAndDark
             MaxStatusPlayer01HP.DataContext = itemsFromDb1;
             ActualStatusPlayer01HP.DataContext = itemsFromDb1;
             ProgressBarPlayerHP.DataContext = itemsFromDb1;
+
+            //MaxStatusPlayer01HP.Content = ProgressBarPlayerHP.Maximum;
 
             //Changing player background on selected character
             if (NameTextBlock01.Text == "Carol")
@@ -148,7 +147,7 @@ namespace LightAndDark
             }
 
 
-            //Calling method Creation() for showing enemies
+            //Calling method Creation() for the first enemy
             Creation();
             
             //MessageBox for variable check
@@ -157,60 +156,12 @@ namespace LightAndDark
 
         }
 
-        //Method Creation() with all enemies and conditions how to distinguish them in each battle by their names
+        //Method Creation() with first enemy and how to distinguish it in first battle
         private void Creation()
         {
             if (Enemy01CheckLabel.Content.ToString() == "Night Lynx")
             {
                 int enemycheck = 4;
-                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb1;
-                EnemyToolTip01.DataContext = itemsFromDb1;
-                Enemy01HP.DataContext = itemsFromDb1;
-                Enemy01AP.DataContext = itemsFromDb1;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
-                ProgressBarEnemyHP.DataContext = itemsFromDb1;
-            }
-            if (Enemy01CheckLabel.Content.ToString() == "Vexspawn")
-            {
-                int enemycheck = 5;
-                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb1;
-                EnemyToolTip01.DataContext = itemsFromDb1;
-                Enemy01HP.DataContext = itemsFromDb1;
-                Enemy01AP.DataContext = itemsFromDb1;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
-                ProgressBarEnemyHP.DataContext = itemsFromDb1;
-            }
-            if (Enemy01CheckLabel.Content.ToString() == "Blightseeker")
-            {
-                int enemycheck = 6;
-                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb1;
-                EnemyToolTip01.DataContext = itemsFromDb1;
-                Enemy01HP.DataContext = itemsFromDb1;
-                Enemy01AP.DataContext = itemsFromDb1;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
-                ProgressBarEnemyHP.DataContext = itemsFromDb1;
-            }
-            if (Enemy01CheckLabel.Content.ToString() == "Auramirage")
-            {
-                int enemycheck = 7;
-                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb1;
-                EnemyToolTip01.DataContext = itemsFromDb1;
-                Enemy01HP.DataContext = itemsFromDb1;
-                Enemy01AP.DataContext = itemsFromDb1;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
-                ProgressBarEnemyHP.DataContext = itemsFromDb1;
-            }
-            if (Enemy01CheckLabel.Content.ToString() == "Spiritfoot")
-            {
-                int enemycheck = 8;
                 var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
                 EnemyTextBlock01.DataContext = itemsFromDb1;
                 EnemyToolTip01.DataContext = itemsFromDb1;
@@ -253,14 +204,12 @@ namespace LightAndDark
                 "Prologue: You're coming closer to the Alman lake" +
                 " when suddenly a Tenebris engage you from the shadows." +
                 " Take this chance to try how powerful you are and kill one of them.";
-            StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-            //In next count, there will be a battle with this enemy, it's used for the previous check
-            
-            
-
+            StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];     
+                                                             
             if (count == 2)
             {
                 count++;
+                //In this count, there will be a battle with this enemy, it's used for the previous check
                 Enemy01CheckLabel.Content = "Night Lynx";
                 Creation();
                 //Disable storytext, enable button for the battle start
@@ -271,7 +220,7 @@ namespace LightAndDark
             if (count == 3)
             {
                 StoryTextBlock.Text =
-                    "It looks like my first enemy was defeated, I don't want see them anymore!" +
+                    "It looks like my first enemy was defeated, I don't want to see them anymore!" +
                     " It was an easy fight,.. but truly, I know that this was just" +
                     " one of the weak Tenebri. So in the end I'll have to fight with" +
                     " much stronger enemies. For now on I have to move on";
@@ -291,14 +240,13 @@ namespace LightAndDark
             if (count == 5)
             {
                 count++;
-                Enemy01CheckLabel.Content = "Vexspawn";
-                Creation();
+                Enemy01CheckLabel.Content = "Blightseeker";
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight02Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
                 //Changing enemy pic for next battle
-                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/Draci-doupe;component/picture/witch.png"));
-                //Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
+                //Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/test/pics/enemy_02.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
             }
             if (count == 6)
             {
@@ -322,11 +270,17 @@ namespace LightAndDark
             {
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
-                    "I’m fine now, I‘ve already rest enough, let’s continue walking towards the Forrest.";
+                    "I’m fine now, but I don't know how long the Tenebris will have the light on their side. So it's" +
+                    " not bad idea to quickly move on. So, let’s continue walking towards the Forrest.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"]; 
             }
             if (count == 9)
             {
+                //Playing music
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Track05.wav");
+                player.Load();
+                player.Play();
+
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "And here I am – at the entrence to the Forrest, I thought that there will be way to go near" +
@@ -352,8 +306,7 @@ namespace LightAndDark
             if (count == 11)
             {
                 count++;
-                Enemy01CheckLabel.Content = "Blightseeker";
-                Creation();
+                Enemy01CheckLabel.Content = "Vexspawn";               
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight03Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -390,12 +343,12 @@ namespace LightAndDark
                 myBrush.ImageSource =
                     new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01_light.jpg", UriKind.Absolute));
                 this.Background = myBrush;
-                Enemy01CheckLabel.Content = "Auramirage";
-                Creation();
+
             }
             if (count == 14)
             {
                 count++;
+                Enemy01CheckLabel.Content = "Auramirage";
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight04Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -430,18 +383,21 @@ namespace LightAndDark
             }
             if (count == 17)
             {
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\08_amb.wav");
+                player.Load();
+                player.Play();
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "So let’s take a few more steps.. whoooaaaa! It looks like we have a company here," +
                     " this Tenebri is certainly not in a good mood for what are we doing here. It " +
                     " looks like he’s the leader of the weaker Forrest Tenebri. I can’t think any longer," +
                     " he’s coming this way and really fast!";
-                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-                Enemy01CheckLabel.Content = "Spiritfoot";
+                StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];               
             }
             if (count == 18)
             {
                 count++;
+                Enemy01CheckLabel.Content = "Spiritfoot";
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight05Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -456,14 +412,15 @@ namespace LightAndDark
             }
             if (count == 20)
             {
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Soundtrack.wav");
+                player.Load();
+                player.Play();
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "Get rekt Forrest Tenebris, I’ve made it! But I really need to recover myself, I have to" +
-                    " meditate for a bit near the water, for us it’s a way how we can heal ourselfes" +
-                    " or other comrades, but it takes a while.";
+                    " meditate for a bit near the water, for us it’s a way how we lights can recover our" +
+                    " stamina, but it takes a while.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-
-                //Add regenerate button near the water +100-200HP then continue
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
@@ -474,15 +431,16 @@ namespace LightAndDark
             {
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
-                    "(Later..) Alright, I’m better now, so what do we have here – an entrance to the" +
+                    "Alright, I’m better now, so what do we have here – an entrance to the" +
                     " Tower. I will carefully try to proceed. Or maybe not? This could be a little problem" +
-                    " a Tenebri with a katana is just looking right at me. I doubt that i could escape him." +
+                    " a Tenebri with a katana is just looking right at me. I doubt that I could escape him." +
                     " Fight with all I’ve got to reach the light!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
             if (count == 22)
             { 
                 count++;
+                Enemy01CheckLabel.Content = "Grimesword";
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight06Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -517,6 +475,9 @@ namespace LightAndDark
             }
             if (count == 27)
             {
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\01_paper_self.wav");
+                player.Load();
+                player.Play();
                 //This is the place where storyline divide into two ways, these two conditions displays each of the ways
                 //First choice
                 if (FirstChoiceAreaButtonWasClicked)
@@ -580,6 +541,7 @@ namespace LightAndDark
                 if (FirstChoiceAreaButtonWasClicked)
                 {
                     count++;
+                    Enemy01CheckLabel.Content = "Abyssteeth";
                     StoryLabel.Visibility = Visibility.Hidden;
                     Fight07Button.Visibility = Visibility.Visible;
                     NextButton.Visibility = Visibility.Hidden;
@@ -614,6 +576,7 @@ namespace LightAndDark
                 if (SecondChoiceAreaButtonWasClicked)
                 {
                     count++;
+                    Enemy01CheckLabel.Content = "Metalghoul";
                     StoryLabel.Visibility = Visibility.Hidden;
                     Fight08Button.Visibility = Visibility.Visible;
                     NextButton.Visibility = Visibility.Hidden;
@@ -640,6 +603,9 @@ namespace LightAndDark
             }
             if (count == 32)
             {
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\01_amb_darkness.wav");
+                player.Load();
+                player.Play();
                 //Storyline is connected into one
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
@@ -657,7 +623,7 @@ namespace LightAndDark
             {
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
-                    "First of all, I should heal my wounds from last battle, it looks like I’ll meet my" +
+                    "First of all, I should recover a bit from the last battle, it looks like I’ll meet my" +
                     " final enemy, so I should be prepared for that.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
@@ -665,9 +631,9 @@ namespace LightAndDark
             {
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
-                    "(Later..) Alright, I’m better and here’s the entrace. Now, let’s face my biggest enemy, the" +
+                    "Alright, I’m better and here’s the entrace. Now, let’s face my biggest enemy, the" +
                     " strongest enemy guarding our light my friends. I’ll give it everything I’ve got. MITTE LUCEM! Give me" +
-                    " your highest power, LIGHT! (+50AP)";
+                    " your highest power, LIGHT!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
                 ImageBrush myBrush = new ImageBrush();
@@ -677,50 +643,40 @@ namespace LightAndDark
             }
             if (count == 35)
             {
-                //count++;
+                count++;
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Track03.wav");
+                player.Load();
+                player.Play();
+                Enemy01CheckLabel.Content = "Flamelich";
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight09Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
                 Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss.jpg"));
-
-                ImageBrush myBrush = new ImageBrush();
-                myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_area.jpg", UriKind.Absolute));
-                this.Background = myBrush;
             }
             if (count == 36)
-            {
-                FirstChoiceHopeButton.Visibility = Visibility.Visible;
-                SecondChoiceHopeButton.Visibility = Visibility.Visible;
-                NextButton.Visibility = Visibility.Hidden;
-
+            {              
                 StoryTextBlock.Text =
-                    "WE’VE DONE IT LIGHTS! We’ve won over darkness for once! Now with the power of this light I can do something" +
+                    "WE’VE DONE IT LIGHTS! We’ve won over darkness once again! Now with the power of this light I can do something" +
                     " about this situation. But it’s not enough light to take everything back to normal. I can just choose" +
                     " between those two options.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-
-                ImageBrush myBrush = new ImageBrush();
-                myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_entrance_area.jpg", UriKind.Absolute));
-                this.Background = myBrush;
             }
             if (count == 38)
             {
                 //Two choices for player in the ending
                 if (FirstChoiceHopeButtonWasClicked || SecondChoiceHopeButtonWasClicked)
                 {
+                    ImageBrush myBrush = new ImageBrush();
+                    myBrush.ImageSource =
+                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/hope_area.jpg", UriKind.Absolute));
+                    this.Background = myBrush;
+
                     ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "Epilogue: That was the story of  a brave light, which was fighting for the side of hope and won every fight till" +
                         " the end, despite of all the loneliness and desperation. Purpose of this game was to show you, that if there is" +
                         " even small trace of hope, you should chase it and never let it go.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-
-                    ImageBrush myBrush = new ImageBrush();
-                    myBrush.ImageSource =
-                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/hope_area.jpg", UriKind.Absolute));
-                    this.Background = myBrush;
                 }
             }
             if (count == 39)
@@ -729,7 +685,7 @@ namespace LightAndDark
                 {
                     ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
-                        "Epilogue: Thank you for playing my game. Author: Lukas Drechsel";
+                        "Epilogue: Thank you for playing this game. Game creator: Lukas Drechsel ; . . . . . . . . . . Music (5th): Tomas Biza";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
                     NextButton.Content = "The END";
@@ -826,7 +782,7 @@ namespace LightAndDark
 
         //Method ShowFight(), it's used when the fight started, to change storytext for all battle mechanics
         private void ShowFight()
-        {
+        {           
             ImageChar01.Visibility = Visibility.Visible;
             Enemy01.Visibility = Visibility.Visible;
             AttackButton.Visibility = Visibility.Visible;
@@ -844,8 +800,7 @@ namespace LightAndDark
             ProgressBarEnemyHP.Visibility = Visibility.Visible;
         }
 
-        //Button for entering next stage after fight to change battle mechanics for storytext
-        private void NextStageButton_Click(object sender, RoutedEventArgs e)
+        private void NextStage()
         {
             ImageChar01.Visibility = Visibility.Hidden;
             Enemy01.Visibility = Visibility.Hidden;
@@ -866,7 +821,22 @@ namespace LightAndDark
             NextButton.Visibility = Visibility.Visible;
             ProgressBarLoop.Visibility = Visibility.Hidden;
             ProgressBarPlayerHP.Visibility = Visibility.Hidden;
-            ProgressBarEnemyHP.Visibility = Visibility.Hidden;
+            ProgressBarEnemyHP.Visibility = Visibility.Hidden;           
+        }
+
+        //Button for entering next stage after fight to change battle mechanics for storytext
+        private void NextStageButton_Click(object sender, RoutedEventArgs e)
+        {
+            NextStage();
+            if (count == 36)
+            {
+                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\09_amb_safe.wav");
+                player.Load();
+                player.Play();
+                FirstChoiceHopeButton.Visibility = Visibility.Visible;
+                SecondChoiceHopeButton.Visibility = Visibility.Visible;
+                NextButton.Visibility = Visibility.Hidden;
+            }
         }
 
         //Button for charging an attack in the battle
@@ -879,7 +849,7 @@ namespace LightAndDark
             await Task.Run(() =>
             {
                 //Calling method Health() for variables
-                Health();
+                HealthConditions();
 
                 //Magic line of code for updating UI elements
                 this.Dispatcher.Invoke(() =>
@@ -910,7 +880,7 @@ namespace LightAndDark
                                 //Add to variable enemy HP minus progress bar value, which equals to what player charged on his AP value
                                 int updateEnemyHP = (eHPstatus - progressBarValue);
                                 //Updating enemy content and saving changes to database
-                                ActualStatusEnemy01HP.Content = updateEnemyHP;
+                                ActualStatusEnemy01HP.Content = updateEnemyHP;                               
                                 string enemyName = EnemyTextBlock01.Text;
                                 Database.UpdateItems(updateEnemyHP, enemyName);
                             });                        
@@ -920,22 +890,20 @@ namespace LightAndDark
                             {
                                 //Little delay for enemy attack
                                 Thread.Sleep(500);
-
-                                int[] numbers = new int[11] { -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0 };
-                                Random rd = new Random();
-                                int randomIndex = rd.Next(0, numbers.Length);
-                                int randomNumber = numbers[randomIndex];
-
                                 this.Dispatcher.Invoke(() =>
                                 {
+                                    int[] numbers = new int[11] { -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0 };
+                                    Random rd = new Random();
+                                    int randomIndex = rd.Next(0, numbers.Length);
+                                    int randomNumber = numbers[randomIndex];
+
                                     //Add to variable player HP minus enemy AP value + some randomize elements
-                                    int updatePlayerHP = (pHPstatus - enemyAPstatus + randomNumber);
+                                    int updatePlayerHP = (pHPstatus - enemyAPstatus - randomNumber);
                                     //Updating player content and saving changes to database
                                     ActualStatusPlayer01HP.Content = updatePlayerHP;
                                     string playerName = NameTextBlock01.Text;
                                     Database.UpdateItems(updatePlayerHP, playerName);
-                                });
-
+                                });                                      
                             }
                             break;
                         }
@@ -947,7 +915,7 @@ namespace LightAndDark
                 }              
             });
             //Calling method Health() for battle ending conditions
-            Health();
+            HealthConditions();
         }
 
         //All battle entering buttons, their separated because each is used in different place with each meaning (they're also placed in game different)
@@ -955,80 +923,251 @@ namespace LightAndDark
         {
             ShowFight();
             Fight01Button.Visibility = Visibility.Hidden;
+            HoldHelp.Visibility = Visibility.Visible;
         }
         private void Fight02Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight02Button.Visibility = Visibility.Hidden;       
         }
         private void Fight03Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight03Button.Visibility = Visibility.Hidden;
         }
         private void Fight04Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight04Button.Visibility = Visibility.Hidden;
         }
         private void Fight05Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight05Button.Visibility = Visibility.Hidden;
         }
         private void Fight06Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight06Button.Visibility = Visibility.Hidden;
         }
         private void Fight07Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight07Button.Visibility = Visibility.Hidden;
         }
         private void Fight08Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight08Button.Visibility = Visibility.Hidden;
         }
         private void Fight09Button_Click(object sender, RoutedEventArgs e)
         {
+            HealthEnemies();
             ShowFight();
             Fight09Button.Visibility = Visibility.Hidden;
-        }        
+
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_area.jpg", UriKind.Absolute));
+            this.Background = myBrush;
+        }
+        /*private void Heal01Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                int playerHP = Int32.Parse(ActualStatusPlayer01HP.Content.ToString());
+                int playerHeal = (playerHP + 1000);
+                string playerName = NameTextBlock01.Text;
+                Database.UpdateItems(playerHeal, playerName);
+                NextStage();
+                Heal01Button.Visibility = Visibility.Hidden;
+            });
+        }*/
 
         //Method Health() with HP, AP definition and battle end conditions
-        private void Health()
+        private void HealthConditions()
         {
+
             //pHPstatus = Int32.Parse(Player01HP.Content.ToString());
             this.Dispatcher.Invoke(() =>
             {
                 var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);           
                 pHPstatus = Int32.Parse(playerHPstatus);         
-                ProgressBarPlayerHP.Maximum = pHPstatus;
+                //ProgressBarPlayerHP.Maximum = pHPstatus;
 
+
+                var enemyHPstatus = Convert.ToString(ActualStatusEnemy01HP.Content);
+                eHPstatus = Int32.Parse(enemyHPstatus);
+                //ProgressBarEnemyHP.Maximum = eHPstatus;
+                //ProgressBarEnemyHP.Maximum = Convert.ToString(MaxStatusEnemy01HP.Content);
+                //ProgressBarEnemyHP.Value = eHPstatus;
+
+                //If enemy HP is less then zero show next stage button, player is winner
+                if (eHPstatus <= 0)
+                {
+                    NextStageButton.Visibility = Visibility.Visible;
+                    VictoryTextBlock.Visibility = Visibility.Visible;
+                    AttackButton.Visibility = Visibility.Hidden;
+                    ChargeButton.Visibility = Visibility.Hidden;
+                    HoldHelp.Visibility = Visibility.Hidden;
+                }
+                //If player HP is less then zero show lose button, player is loser
+                if (pHPstatus <= 0)
+                {
+                    LoseButton.Visibility = Visibility.Visible;
+                    LoseTextBlock.Visibility = Visibility.Visible;
+                    AttackButton.Visibility = Visibility.Hidden;
+                    ChargeButton.Visibility = Visibility.Hidden;
+                    HoldHelp.Visibility = Visibility.Hidden;
+                }
+            });
+        }
+
+        //Method HealthEnemies() for checking conditions and how to distinguish them in each battle by their names
+        private void HealthEnemies()
+        {           
+            if (Enemy01CheckLabel.Content.ToString() == "Blightseeker")
+            {
+                int enemycheck = 5;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Vexspawn")
+            {
+                int enemycheck = 6;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Auramirage")
+            {
+                int enemycheck = 7;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Spiritfoot")
+            {
+                int enemycheck = 8;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Grimesword")
+            {
+                int enemycheck = 9;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Abyssteeth")
+            {
+                int enemycheck = 11;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Metalghoul")
+            {
+                int enemycheck = 10;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Flamelich")
+            {
+                int enemycheck = 12;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HPCheck.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+
+                ActualStatusEnemy01HP.Content = ActualStatusEnemy01HPCheck.Content;
+                Health();
+            }
+        }
+
+        //Method Health() with player and enemy HP
+        private void Health()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                var playerHPstatus = Convert.ToString(ActualStatusPlayer01HP.Content);
+                pHPstatus = Int32.Parse(playerHPstatus);
+                ProgressBarPlayerHP.Maximum = pHPstatus;
 
                 var enemyHPstatus = Convert.ToString(ActualStatusEnemy01HP.Content);
                 eHPstatus = Int32.Parse(enemyHPstatus);
                 ProgressBarEnemyHP.Maximum = eHPstatus;
             });
-
-            //If enemy HP is less then zero show next stage button, player is winner
-            if (eHPstatus <= 0)
-            {
-                NextStageButton.Visibility = Visibility.Visible;
-                VictoryTextBlock.Visibility = Visibility.Visible;
-                AttackButton.Visibility = Visibility.Hidden;
-                ChargeButton.Visibility = Visibility.Hidden;               
-            }
-            //If player HP is less then zero show lose button, player is loser
-            if (pHPstatus <= 0)
-            {
-                LoseButton.Visibility = Visibility.Visible;
-                LoseTextBlock.Visibility = Visibility.Visible;
-                AttackButton.Visibility = Visibility.Hidden;
-                ChargeButton.Visibility = Visibility.Hidden;
-            }
         }
 
         //Button used for attacking, basicaly used for purpose of charge button
@@ -1036,7 +1175,7 @@ namespace LightAndDark
         {
             AttackButtonWasClicked = true;
 
-            Health();
+            HealthConditions();
         }
 
         //Lose button sends player back to menu
@@ -1046,8 +1185,6 @@ namespace LightAndDark
             selectionWindow.Show();
             this.Close();
         }
-
-
 
     }
 }

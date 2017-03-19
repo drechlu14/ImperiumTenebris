@@ -48,16 +48,25 @@ namespace LightAndDark
             if (count == 2)
             {
                 ((Storyboard)FindResource("animate")).Begin(TextBlock);
-                TextBlock.Text = "Still you must pay attention to all of them. They can be very dangerous even in battle." +
-                    " Remember if your light value reaches zero, your journey will end and the game is over.";
+                TextBlock.Text =
+                    "Still you must pay attention to all of them. They can be very dangerous even in battle." +
+                    " Charge your light and release it when it's on the highest value. If you can do it, Tenebri" +
+                    " will take massive damage from your attacks.";
                 TextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
             if (count == 3)
             {
                 ((Storyboard)FindResource("animate")).Begin(TextBlock);
+                TextBlock.Text = "Always keep on your mind, if your light value reaches zero, your journey will end and the game is over.";
+                TextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+            }
+            if (count == 4)
+            {
+                ((Storyboard)FindResource("animate")).Begin(TextBlock);
                 TextBlock.Text =
                     "Attention!: This game is not meant to entertain player with it's combat system. It's meant" +
-                    " to make player think about it and dive into the story. From the beginning till the end.";
+                    " to make player think about it and dive into the story. From the beginning till the end of the game." +
+                    " Game creator: Lukas Drechsel ; . . . Music (5th): Tomas Biza";
                 NextPageButton.Visibility = Visibility.Hidden;
                 TextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }

@@ -34,7 +34,7 @@ namespace LightAndDark
         }
         public Task<List<Statistics>> GetItemsNotDoneAsyncEnemyCheck(int enemycheck)
         {
-            return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE ID = '" + enemycheck + "'");
+            return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE checkID = '" + enemycheck + "'");
         }
 
         public Task<List<Statistics>> GetItemsNotDoneAsync2()

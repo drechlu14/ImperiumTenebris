@@ -41,7 +41,7 @@ namespace LightAndDark
                     player01.check = 1;
                     player01.Name = "Lumen";
                     player01.Type = "The White Light";
-                    player01.HP = 2400;
+                    player01.HP = 5800;
                     player01.AP = 170;
                     Database.SaveItemAsync(player01);
 
@@ -49,16 +49,16 @@ namespace LightAndDark
                     player02.ID = 2;
                     player02.check = 2;
                     player02.Name = "Carol";
-                    player02.Type = "Shiny Bullet";
-                    player02.HP = 1900;
-                    player02.AP = 220;
+                    player02.Type = "The Shiny Bullet";
+                    player02.HP = 4900;
+                    player02.AP = 230;
                     Database.SaveItemAsync(player02);
 
                     Statistics player03 = new Statistics();
                     player01.check = 3;
                     player03.Name = "Sheen";
                     player03.Type = "Angel of Justice";
-                    player03.HP = 2200;
+                    player03.HP = 5500;
                     player03.AP = 190;
                     Database.SaveItemAsync(player03);
                 }
