@@ -38,7 +38,7 @@ namespace LightAndDark
             
             //Adding enemies to database
             itemsFromDbMap = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
-            if (itemsFromDbMap.Count < 12)
+            if (itemsFromDbMap.Count < 4)
             {
                 Statistics enemy01 = new Statistics();
                 enemy01.Name = "Night Lynx";
@@ -46,56 +46,72 @@ namespace LightAndDark
                 enemy01.HP = 720;
                 enemy01.AP = 60;
                 Database.SaveItemAsync(enemy01);
-
+            }
+            if (itemsFromDbMap.Count < 5)
+            {
                 Statistics enemy02 = new Statistics();
-                enemy02.Name = "Blightseeker";
-                enemy02.Type = "The Ancient Face";
-                enemy02.HP = 1380;
-                enemy02.AP = 70;
+                enemy02.Name = "Vexspawn";
+                enemy02.Type = "The Anguished";
+                enemy02.HP = 880;
+                enemy02.AP = 60;
                 Database.SaveItemAsync(enemy02);
-
+            }
+            if (itemsFromDbMap.Count < 6)
+            {
                 Statistics enemy03 = new Statistics();
-                enemy03.Name = "Vexspawn";
-                enemy03.Type = "The Anguished";
-                enemy03.HP = 880;
-                enemy03.AP = 60;
+                enemy03.Name = "Blightseeker";
+                enemy03.Type = "The Ancient Face";
+                enemy03.HP = 1380;
+                enemy03.AP = 70;
                 Database.SaveItemAsync(enemy03);
-
+            }
+            if (itemsFromDbMap.Count < 7)
+            {
                 Statistics enemy04 = new Statistics();
                 enemy04.Name = "Auramirage";
                 enemy04.Type = "The Nasty Anomaly";
                 enemy04.HP = 1100;
                 enemy04.AP = 65;
                 Database.SaveItemAsync(enemy04);
-
+            }
+            if (itemsFromDbMap.Count < 8)
+            {
                 Statistics enemy05 = new Statistics();
                 enemy05.Name = "Spiritfoot";
                 enemy05.Type = "The Dirty Charmer";
                 enemy05.HP = 1600;
                 enemy05.AP = 80;
                 Database.SaveItemAsync(enemy05);
-
+            }
+            if (itemsFromDbMap.Count < 9)
+            {
                 Statistics enemy06 = new Statistics();
                 enemy06.Name = "Grimesword";
                 enemy06.Type = "The Obsidian Killer";
                 enemy06.HP = 1370;
                 enemy06.AP = 75;
                 Database.SaveItemAsync(enemy06);
-
+            }
+            if (itemsFromDbMap.Count < 10)
+            {
                 Statistics enemy07 = new Statistics();
                 enemy07.Name = "Abyssteeth";
                 enemy07.Type = "The Obsidian Killer";
                 enemy07.HP = 1280;
                 enemy07.AP = 90;
                 Database.SaveItemAsync(enemy07);
-
+            }
+            if (itemsFromDbMap.Count < 11)
+            {
                 Statistics enemy08 = new Statistics();
                 enemy08.Name = "Metalghoul";
                 enemy08.Type = "The Deadly Horror";
                 enemy08.HP = 1520;
                 enemy08.AP = 80;
                 Database.SaveItemAsync(enemy08);
-
+            }
+            if (itemsFromDbMap.Count < 12)
+            {
                 Statistics boss = new Statistics();
                 boss.Name = "Flamelich";
                 boss.Type = "The Parallel Deformity";
@@ -104,7 +120,8 @@ namespace LightAndDark
                 Database.SaveItemAsync(boss);
             }
 
-            /*Info about database content*/
+            /*
+             * Info about database content*/
             var itemsFromDb = Database.GetItemsNotDoneAsync().Result;
             ItemsCount.Content = "Items in Database " + itemsFromDb.Count;
             ToDoItemsListView.ItemsSource = itemsFromDb;
@@ -121,7 +138,7 @@ namespace LightAndDark
             ProgressBarPlayerHP.DataContext = itemsFromDb1;
 
             //Changing player background on selected character
-            if (NameTextBlock01.Text == "Calor")
+            if (NameTextBlock01.Text == "Carol")
             {
                 ImageChar01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/light_char_02.jpg"));
             }
@@ -145,20 +162,7 @@ namespace LightAndDark
         {
             if (Enemy01CheckLabel.Content.ToString() == "Night Lynx")
             {
-                //var getItemsFromDb = Database.GetItemsFromDatabase(ID).Result;
                 int enemycheck = 4;
-                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
-                EnemyTextBlock01.DataContext = itemsFromDb1;
-                EnemyToolTip01.DataContext = itemsFromDb1;
-                Enemy01HP.DataContext = itemsFromDb1;
-                Enemy01AP.DataContext = itemsFromDb1;
-                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
-                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
-                ProgressBarEnemyHP.DataContext = itemsFromDb1;
-            }
-            if (Enemy01CheckLabel.Content.ToString() == "Blightseeker")
-            {
-                int enemycheck = 6;
                 var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
                 EnemyTextBlock01.DataContext = itemsFromDb1;
                 EnemyToolTip01.DataContext = itemsFromDb1;
@@ -171,6 +175,18 @@ namespace LightAndDark
             if (Enemy01CheckLabel.Content.ToString() == "Vexspawn")
             {
                 int enemycheck = 5;
+                var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
+                EnemyTextBlock01.DataContext = itemsFromDb1;
+                EnemyToolTip01.DataContext = itemsFromDb1;
+                Enemy01HP.DataContext = itemsFromDb1;
+                Enemy01AP.DataContext = itemsFromDb1;
+                MaxStatusEnemy01HP.DataContext = itemsFromDb1;
+                ActualStatusEnemy01HP.DataContext = itemsFromDb1;
+                ProgressBarEnemyHP.DataContext = itemsFromDb1;
+            }
+            if (Enemy01CheckLabel.Content.ToString() == "Blightseeker")
+            {
+                int enemycheck = 6;
                 var itemsFromDb1 = Database.GetItemsNotDoneAsyncEnemyCheck(enemycheck).Result;
                 EnemyTextBlock01.DataContext = itemsFromDb1;
                 EnemyToolTip01.DataContext = itemsFromDb1;
@@ -230,6 +246,8 @@ namespace LightAndDark
         {
             //Count add +1
             count++;
+            //Story textblock animation
+            ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
             //Storytext
             StoryTextBlock.Text =
                 "Prologue: You're coming closer to the Alman lake" +
@@ -237,21 +255,23 @@ namespace LightAndDark
                 " Take this chance to try how powerful you are and kill one of them.";
             StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             //In next count, there will be a battle with this enemy, it's used for the previous check
-            Enemy01CheckLabel.Content = "Night Lynx";
-            Creation();
+            
+            
 
             if (count == 2)
             {
                 count++;
+                Enemy01CheckLabel.Content = "Night Lynx";
+                Creation();
                 //Disable storytext, enable button for the battle start
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight01Button.Visibility = Visibility.Visible;
-                NextButton.Visibility = Visibility.Hidden;
+                NextButton.Visibility = Visibility.Hidden;               
             }
             if (count == 3)
-            {               
+            {
                 StoryTextBlock.Text =
-                    "It looks like my first enemy is defeated, I don't wanna see them anymore!" +
+                    "It looks like my first enemy was defeated, I don't want see them anymore!" +
                     " It was an easy fight,.. but truly, I know that this was just" +
                     " one of the weak Tenebri. So in the end I'll have to fight with" +
                     " much stronger enemies. For now on I have to move on";
@@ -259,26 +279,30 @@ namespace LightAndDark
             }
             if (count == 4)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "So, I’m going to progress on my journey to the mighty source of light." +
                     " As I see on the Alman lake shore, there is a Tenebris guardian " +
                     " keeping eye on everything that happens here. If I want to take" +
                     " another step, I must fight him and defeat him!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-                Enemy01CheckLabel.Content = "Blightseeker";
-                Creation();
+
             }
             if (count == 5)
             {
                 count++;
+                Enemy01CheckLabel.Content = "Vexspawn";
+                Creation();
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight02Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
                 //Changing enemy pic for next battle
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/Draci-doupe;component/picture/witch.png"));
+                //Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
             }
             if (count == 6)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "This Tenebris guardian was harder than that shadow, he had a lot of HP…" +
                     " it was an exhausting fight. I need to take a rest before I can go any" +
@@ -287,6 +311,7 @@ namespace LightAndDark
             }
             if (count == 7)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "There will be a lot of Tenebris hiding in shadows, it won’t be easy to stay unnoticed." +
                     " I can’t come up with any plan that would solve this, I just know, that it will be best" +
@@ -295,18 +320,20 @@ namespace LightAndDark
             }
             if (count == 8)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "I’m fine now, I‘ve already rest enough, let’s continue walking towards the Forrest.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"]; 
             }
             if (count == 9)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "And here I am – at the entrence to the Forrest, I thought that there will be way to go near" +
                     " the lake from the very beginning, but there isn’t any way. I have to go into the deep" +
                     " Forrest first and then as quickly as possible go near the shore, where I’ll be safer.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-
+                
                 //Changing background area
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
@@ -315,16 +342,18 @@ namespace LightAndDark
             }
             if (count == 10)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "So far so good,.. at least I‘ve thought that, before that Tenebri just saw my light." +
                     " It looks like a very small and weak enemy, but I shouldn’t understimate it, let’s defeat it!";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
-                Enemy01CheckLabel.Content = "Vexspawn";
-                Creation();
+
             }
             if (count == 11)
             {
                 count++;
+                Enemy01CheckLabel.Content = "Blightseeker";
+                Creation();
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight03Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -340,6 +369,7 @@ namespace LightAndDark
             }
             if (count == 13)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "Wait a minute, I’ve already been here?! It looks like some kind of illusion, I must find a source" +
                     " of it, so I can go any further. I‘m looking all around me, but still haven’t seen anything that" +
@@ -349,6 +379,7 @@ namespace LightAndDark
             }
             if (count == 13)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "„Extende ad lucem!“. My view distence is larger now and what just caught my eye" +
                     " is something suspicious, it looks like some kind of dark vampire, maybe it’s" +
@@ -385,6 +416,7 @@ namespace LightAndDark
             }
             if (count == 16)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "Awesome, I’m out of it, finally something else. And what’s even better, I can" +
                     " see the exit, it’s not the shore tho, but I can tell where I’m now, near the tower" +
@@ -398,6 +430,7 @@ namespace LightAndDark
             }
             if (count == 17)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "So let’s take a few more steps.. whoooaaaa! It looks like we have a company here," +
                     " this Tenebri is certainly not in a good mood for what are we doing here. It " +
@@ -423,6 +456,7 @@ namespace LightAndDark
             }
             if (count == 20)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "Get rekt Forrest Tenebris, I’ve made it! But I really need to recover myself, I have to" +
                     " meditate for a bit near the water, for us it’s a way how we can heal ourselfes" +
@@ -438,6 +472,7 @@ namespace LightAndDark
             }
             if (count == 21)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "(Later..) Alright, I’m better now, so what do we have here – an entrance to the" +
                     " Tower. I will carefully try to proceed. Or maybe not? This could be a little problem" +
@@ -463,6 +498,7 @@ namespace LightAndDark
             }
             if (count == 24)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "Let’s go inside and check the light on the top… what, the light is gone? That’s really" +
                     " wierd, I’m sure that I saw it before the first Tenebri was defeated near the Alman lake.";
@@ -470,6 +506,7 @@ namespace LightAndDark
             }
             if (count == 25)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 FirstChoiceAreaButton.Visibility = Visibility.Visible;
                 SecondChoiceAreaButton.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
@@ -484,6 +521,7 @@ namespace LightAndDark
                 //First choice
                 if (FirstChoiceAreaButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "Those mountains are quite amazing! Open areas are better choice for me, that’s for sure." +
                         " Still I’m surprised that there weren’t any Tenebri on the way here, maybe I’m just" +
@@ -499,6 +537,7 @@ namespace LightAndDark
                 //Second choice
                 if (SecondChoiceAreaButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "The climate is drasticaly changing on my way to the second tower, it’s much colder here." +
                         " Also I haven’t seen any Temebri so far, I don’t know if I should be happy about that. I" +
@@ -515,6 +554,7 @@ namespace LightAndDark
             {
                 if (FirstChoiceAreaButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "A big tree, interesting. WHAT!? A Tenebri with light behind" +
                         " him, I must defeat him, but it won’t be that easy, this guy looks tough.";
@@ -528,6 +568,7 @@ namespace LightAndDark
 
                 if (SecondChoiceAreaButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "Here we are, at the entrace of the second tower, without any guard. This seems suspicious, but who cares." +
                         " I need to climb at the top to see the light.. or even darkness.";
@@ -547,6 +588,7 @@ namespace LightAndDark
 
                 if (SecondChoiceAreaButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "WHAT?! How did I get there? I was just right in the mountains and now I’m in the air on some" +
                         " wierd flying tower. And like if that wasn’t enough. Avarage size Tenebri is in front of me, it" +
@@ -582,6 +624,7 @@ namespace LightAndDark
             {
                 if (FirstChoiceAreaButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "Daaaaarknesss everywhere. Wait! A portal.. something is happening.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
@@ -598,6 +641,7 @@ namespace LightAndDark
             if (count == 32)
             {
                 //Storyline is connected into one
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "I’m back here, really.. as I should be surprised by anything in this world. Now I see it clearly, both" +
                     " towers are without lights. And.. was that here before? Lot of lights in the center of Alman lake – Altar" +
@@ -611,6 +655,7 @@ namespace LightAndDark
             }
             if (count == 33)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "First of all, I should heal my wounds from last battle, it looks like I’ll meet my" +
                     " final enemy, so I should be prepared for that.";
@@ -618,6 +663,7 @@ namespace LightAndDark
             }
             if (count == 34)
             {
+                ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "(Later..) Alright, I’m better and here’s the entrace. Now, let’s face my biggest enemy, the" +
                     " strongest enemy guarding our light my friends. I’ll give it everything I’ve got. MITTE LUCEM! Give me" +
@@ -664,6 +710,7 @@ namespace LightAndDark
                 //Two choices for player in the ending
                 if (FirstChoiceHopeButtonWasClicked || SecondChoiceHopeButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "Epilogue: That was the story of  a brave light, which was fighting for the side of hope and won every fight till" +
                         " the end, despite of all the loneliness and desperation. Purpose of this game was to show you, that if there is" +
@@ -680,6 +727,7 @@ namespace LightAndDark
             {
                 if (FirstChoiceHopeButtonWasClicked || SecondChoiceHopeButtonWasClicked)
                 {
+                    ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "Epilogue: Thank you for playing my game. Author: Lukas Drechsel";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];

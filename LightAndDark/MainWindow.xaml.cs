@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,9 +25,12 @@ namespace LightAndDark
 
         public MainWindow()
         {
-            InitializeComponent();  
+            InitializeComponent();
 
-        }
+            SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\game_menu.wav");
+            player.Load();
+            player.Play();
+        }       
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -37,7 +41,7 @@ namespace LightAndDark
         {
             CharacterSelection selectionWindow = new CharacterSelection();
             selectionWindow.Show();
-            this.Close();
+            this.Close();          
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
