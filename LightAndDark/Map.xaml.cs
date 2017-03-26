@@ -16,7 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
+using System.Reflection;
+using System.IO;
 
 namespace LightAndDark
 {
@@ -36,7 +39,10 @@ namespace LightAndDark
         {          
             InitializeComponent();
 
-            SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Track04.wav");
+            // getting root path
+            string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+
+            SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Track04.wav"));            
             player.Load();
             player.Play();
 
@@ -245,8 +251,8 @@ namespace LightAndDark
                 Fight02Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
                 //Changing enemy pic for next battle
-                //Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/test/pics/enemy_02.jpg"));
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_02.jpg"));
+                //Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_02.jpg"));
             }
             if (count == 6)
             {

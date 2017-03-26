@@ -169,6 +169,47 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="music\01_amb_darkness.wav" />
+    <Content Include="music\01_paper_self.wav" />
+    <Content Include="music\08_amb.wav" />
+    <Content Include="music\09_amb_safe.wav" />
+    <Content Include="music\11_paper_howl.wav" />
+    <Content Include="music\game_menu.wav" />
+    <Content Include="music\Soundtrack.wav" />
+    <Content Include="music\Track03.wav" />
+    <Content Include="music\Track04.wav" />
+    <Content Include="music\Track05.wav" />
+    <Content Include="music\Track06.wav" />
+    <Content Include="music\Track07.wav" />
+    <Resource Include="pics\area_01.jpg" />
+    <Resource Include="pics\area_01_light.jpg" />
+    <Resource Include="pics\area_02.jpg" />
+    <Resource Include="pics\area_03.jpg" />
+    <Resource Include="pics\area_04.jpg" />
+    <Resource Include="pics\area_05.jpg" />
+    <Resource Include="pics\area_06.jpg" />
+    <Resource Include="pics\area_07.jpg" />
+    <Resource Include="pics\boss.jpg" />
+    <Resource Include="pics\boss_area.jpg" />
+    <Resource Include="pics\boss_entrance_area.jpg" />
+    <Resource Include="pics\boss_inverted.jpg" />
+    <Resource Include="pics\enemy_01.jpg" />
+    <Resource Include="pics\enemy_02.jpg" />
+    <Resource Include="pics\enemy_04.jpg" />
+    <Resource Include="pics\enemy_05.jpg" />
+    <Resource Include="pics\enemy_06.jpg" />
+    <Resource Include="pics\enemy_07.jpg" />
+    <Resource Include="pics\enemy_08.jpg" />
+    <Resource Include="pics\enemy_09.jpg" />
+    <Resource Include="pics\enemy_10_inverted.jpg" />
+    <Resource Include="pics\hope_area.jpg" />
+    <Resource Include="pics\light_char_01.jpg" />
+    <Resource Include="pics\light_char_01_border.jpg" />
+    <Resource Include="pics\light_char_02.jpg" />
+    <Resource Include="pics\light_char_03.jpg" />
+    <Resource Include="pics\map_01.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.2\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.2\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
