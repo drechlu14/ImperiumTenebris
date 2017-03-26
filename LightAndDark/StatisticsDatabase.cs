@@ -23,7 +23,6 @@ namespace LightAndDark
         {
             return database.QueryAsync<Statistics>("SELECT * FROM [Statistics]");
         }
-
         public Task<List<Statistics>> GetItemsNotDoneAsync1()
         {
             return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE ID = 1");
@@ -41,22 +40,14 @@ namespace LightAndDark
         {
             return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE ID = 2");
         }
-
         public Task<List<Statistics>> GetItemsNotDoneAsync3()
         {
             return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE ID = 3");
         }
-
-        public Task<List<Statistics>> GetItemsNotDoneAsync4()
-        {
-            return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE ID = 4");
-        }
-
         public Task<List<Statistics>> UpdateItems(int HP, string atributName)
         {
             return database.QueryAsync<Statistics>("UPDATE [Statistics] SET [HP] = '" + HP + "' WHERE [Name] = '" + atributName + "'");
         }
-
         public Task<List<Statistics>> GetItemsFromDatabase(int ID)
         {
             return database.QueryAsync<Statistics>("SELECT * FROM [Statistics] WHERE [ID] = " + ID);

@@ -29,6 +29,12 @@ namespace LightAndDark
         {
             InitializeComponent();
 
+            //Background setting
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(@"pack://application:,,,/pics/menu_background.jpg", UriKind.Absolute));
+            this.Background = myBrush;
+
             itemsFromDb = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             //For cycle to prevent bugs
             for (int i = 0; i <= 2; i++)

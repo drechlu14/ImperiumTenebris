@@ -182,6 +182,7 @@
     <Content Include="music\Track05.wav" />
     <Content Include="music\Track06.wav" />
     <Content Include="music\Track07.wav" />
+    <Resource Include="pics\menu_background.jpg" />
     <Resource Include="pics\area_01.jpg" />
     <Resource Include="pics\area_01_light.jpg" />
     <Resource Include="pics\area_02.jpg" />

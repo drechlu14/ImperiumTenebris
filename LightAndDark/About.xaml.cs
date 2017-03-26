@@ -24,6 +24,12 @@ namespace LightAndDark
         public About()
         {
             InitializeComponent();
+
+            //Background setting
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(@"pack://application:,,,/pics/menu_background.jpg", UriKind.Absolute));
+            this.Background = myBrush;
         }
 
         //Button for back to menu

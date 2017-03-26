@@ -39,9 +39,14 @@ namespace LightAndDark
         {          
             InitializeComponent();
 
-            // getting root path
-            string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+            //Background setting
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(@"pack://application:,,,/pics/map_01.jpg", UriKind.Absolute));
+            this.Background = myBrush;
 
+            //Getting root path for sound path, playing sound
+            string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
             SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Track04.wav"));            
             player.Load();
             player.Play();
@@ -282,8 +287,8 @@ namespace LightAndDark
             }
             if (count == 9)
             {
-                //Playing music
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Track05.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Track05.wav"));
                 player.Load();
                 player.Play();
 
@@ -297,7 +302,7 @@ namespace LightAndDark
                 //Changing background area
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/area_01.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
             if (count == 10)
@@ -316,7 +321,7 @@ namespace LightAndDark
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight03Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_04.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_04.jpg"));
             }
             if (count == 12)
             {
@@ -347,7 +352,7 @@ namespace LightAndDark
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01_light.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/area_01_light.jpg", UriKind.Absolute));
                 this.Background = myBrush;
 
             }
@@ -358,7 +363,7 @@ namespace LightAndDark
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight04Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_05.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_05.jpg"));
             }
             if (count == 15)
             {
@@ -370,7 +375,7 @@ namespace LightAndDark
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_01.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/area_01.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
             if (count == 16)
@@ -384,12 +389,13 @@ namespace LightAndDark
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_02.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/area_02.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
             if (count == 17)
             {
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\08_amb.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/08_amb.wav"));
                 player.Load();
                 player.Play();
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
@@ -407,7 +413,7 @@ namespace LightAndDark
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight05Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_06.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_06.jpg"));
             }
             if (count == 19)
             {
@@ -418,7 +424,8 @@ namespace LightAndDark
             }
             if (count == 20)
             {
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Soundtrack.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Soundtrack.wav"));
                 player.Load();
                 player.Play();
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
@@ -430,7 +437,7 @@ namespace LightAndDark
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_03.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/area_03.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
             if (count == 21)
@@ -450,7 +457,7 @@ namespace LightAndDark
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight06Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_07.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_07.jpg"));
             }
             if (count == 23)
             {
@@ -481,7 +488,8 @@ namespace LightAndDark
             }
             if (count == 27)
             {
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\01_paper_self.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/01_paper_self.wav"));
                 player.Load();
                 player.Play();
                 //This is the place where storyline divide into two ways, these two conditions displays each of the ways
@@ -497,7 +505,7 @@ namespace LightAndDark
 
                     ImageBrush myBrush = new ImageBrush();
                     myBrush.ImageSource =
-                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_06.jpg", UriKind.Absolute));
+                        new BitmapImage(new Uri(@"pack://application:,,,/pics/area_06.jpg", UriKind.Absolute));
                     this.Background = myBrush;
                 }
 
@@ -513,7 +521,7 @@ namespace LightAndDark
 
                     ImageBrush myBrush = new ImageBrush();
                     myBrush.ImageSource =
-                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_04.jpg", UriKind.Absolute));
+                        new BitmapImage(new Uri(@"pack://application:,,,/pics/area_04.jpg", UriKind.Absolute));
                     this.Background = myBrush;
                 }
             }
@@ -529,7 +537,7 @@ namespace LightAndDark
 
                     ImageBrush myBrush = new ImageBrush();
                     myBrush.ImageSource =
-                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_07.jpg", UriKind.Absolute));
+                        new BitmapImage(new Uri(@"pack://application:,,,/pics/area_07.jpg", UriKind.Absolute));
                     this.Background = myBrush;
                 }
 
@@ -551,7 +559,7 @@ namespace LightAndDark
                     StoryLabel.Visibility = Visibility.Hidden;
                     Fight07Button.Visibility = Visibility.Visible;
                     NextButton.Visibility = Visibility.Hidden;
-                    Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_09.jpg"));
+                    Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_09.jpg"));
                 }
 
                 if (SecondChoiceAreaButtonWasClicked)
@@ -565,7 +573,7 @@ namespace LightAndDark
 
                     ImageBrush myBrush = new ImageBrush();
                     myBrush.ImageSource =
-                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/area_05.jpg", UriKind.Absolute));
+                        new BitmapImage(new Uri(@"pack://application:,,,/pics/area_05.jpg", UriKind.Absolute));
                     this.Background = myBrush;
                 }
             }
@@ -586,7 +594,7 @@ namespace LightAndDark
                     StoryLabel.Visibility = Visibility.Hidden;
                     Fight08Button.Visibility = Visibility.Visible;
                     NextButton.Visibility = Visibility.Hidden;
-                    Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/enemy_08.jpg"));
+                    Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/enemy_08.jpg"));
                 }
             }
             if (count == 31)
@@ -609,7 +617,8 @@ namespace LightAndDark
             }
             if (count == 32)
             {
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\01_amb_darkness.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/01_amb_darkness.wav"));
                 player.Load();
                 player.Play();
                 //Storyline is connected into one
@@ -622,7 +631,7 @@ namespace LightAndDark
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/map_01.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/map_01.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
             if (count == 33)
@@ -644,20 +653,21 @@ namespace LightAndDark
 
                 ImageBrush myBrush = new ImageBrush();
                 myBrush.ImageSource =
-                    new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_entrance_area.jpg", UriKind.Absolute));
+                    new BitmapImage(new Uri(@"pack://application:,,,/pics/boss_entrance_area.jpg", UriKind.Absolute));
                 this.Background = myBrush;
             }
             if (count == 35)
             {
                 count++;
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\Track03.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Track03.wav"));
                 player.Load();
                 player.Play();
                 Enemy01CheckLabel.Content = "Flamelich";
                 StoryLabel.Visibility = Visibility.Hidden;
                 Fight09Button.Visibility = Visibility.Visible;
                 NextButton.Visibility = Visibility.Hidden;
-                Enemy01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss.jpg"));
+                Enemy01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/boss.jpg"));
             }
             if (count == 36)
             {              
@@ -674,7 +684,7 @@ namespace LightAndDark
                 {
                     ImageBrush myBrush = new ImageBrush();
                     myBrush.ImageSource =
-                        new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/hope_area.jpg", UriKind.Absolute));
+                        new BitmapImage(new Uri(@"pack://application:,,,/pics/hope_area.jpg", UriKind.Absolute));
                     this.Background = myBrush;
 
                     ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
@@ -836,7 +846,8 @@ namespace LightAndDark
             NextStage();
             if (count == 36)
             {
-                SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\09_amb_safe.wav");
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/09_amb_safe.wav"));
                 player.Load();
                 player.Play();
                 FirstChoiceHopeButton.Visibility = Visibility.Visible;
@@ -981,7 +992,7 @@ namespace LightAndDark
 
             ImageBrush myBrush = new ImageBrush();
             myBrush.ImageSource =
-                new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/boss_area.jpg", UriKind.Absolute));
+                new BitmapImage(new Uri(@"pack://application:,,,/pics/boss_area.jpg", UriKind.Absolute));
             this.Background = myBrush;
         }
         /*private void Heal01Button_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,14 @@ namespace LightAndDark
         {
             InitializeComponent();
 
-            SoundPlayer player = new SoundPlayer("C:\\Users\\Luky\\Sounds\\game_menu.wav");
+            //Background setting
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(@"pack://application:,,,/pics/menu_background.jpg", UriKind.Absolute));
+            this.Background = myBrush;
+
+            string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+            SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/game_menu.wav"));
             player.Load();
             player.Play();
         }       
