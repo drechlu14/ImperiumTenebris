@@ -35,6 +35,10 @@ namespace LightAndDark
                 new BitmapImage(new Uri(@"pack://application:,,,/pics/menu_background.jpg", UriKind.Absolute));
             this.Background = myBrush;
 
+            ImageChar01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/light_char_01.jpg"));
+            ImageChar02.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/light_char_02.jpg"));
+            ImageChar03.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/light_char_03.jpg"));
+
             itemsFromDb = new ObservableCollection<Statistics>(Database.GetItemsNotDoneAsync().Result);
             //For cycle to prevent bugs
             for (int i = 0; i <= 2; i++)

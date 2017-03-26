@@ -120,7 +120,7 @@
                             <StackPanel>
                                 <Path Margin="100,100,0,0" Fill="#e5AAAAAA" Data="M 0 16 L 16 0 L 32 16 Z"/>
                                 <Label x:Name="PlayerStatisticsLabel" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="66" FontFamily="Trajan Pro" Foreground="white" FontWeight="Bold" >
-                                    <Border Width="700" BorderThickness="5" CornerRadius="5" BorderBrush="DarkGray" Background="#050909" Padding="40">
+                                    <Border Width="765" BorderThickness="5" CornerRadius="5" BorderBrush="DarkGray" Background="#050909" Padding="40" Margin="-20,0,0,0">
                                         <TextBlock x:Name="StatisticsTextBlock" TextAlignment="Left" TextWrapping="WrapWithOverflow" FontFamily="Perpetua" FontWeight="Normal" FontSize="80" >
                                             <Run Text="Title: "/>
                                             <Run Text="{Binding Type}"/>

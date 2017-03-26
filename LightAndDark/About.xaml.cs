@@ -71,10 +71,9 @@ namespace LightAndDark
                 ((Storyboard)FindResource("animate")).Begin(TextBlock);
                 TextBlock.Text =
                     "Attention!: This game is not meant to entertain player with it's combat system. It's meant" +
-                    " to make player think about it and dive into the story. From the beginning till the end of the game." +
-                    " Game creator: Lukas Drechsel ; . . . Music (5th): Tomas Biza";
-                NextPageButton.Visibility = Visibility.Hidden;
+                    " to make player think about it and dive into the story. From the beginning till the end of the game.";
                 TextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
+                NextPageButton.Visibility = Visibility.Hidden;
             }
         }
     }

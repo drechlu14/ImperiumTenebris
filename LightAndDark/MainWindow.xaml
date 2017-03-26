@@ -90,7 +90,7 @@
             </Label.Effect>
         </Label>
 
-        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="ProfileButton" Click="ProfileButton_Click" Content="Profile" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400"  Margin="30" >
+        <Button Style="{StaticResource TrasparentBackgroundButtonStyle}" x:Name="CreditsButton" Click="CreditsButton_Click" Content="Credits" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="400"  Margin="30" >
 
             <Button.Effect>
                 <DropShadowEffect/>

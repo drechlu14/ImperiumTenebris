@@ -58,9 +58,11 @@ namespace LightAndDark
             this.Close();
         }
 
-        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        private void CreditsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Credits creditsWindow = new Credits();
+            creditsWindow.Show();
+            this.Close();
         }
 
 

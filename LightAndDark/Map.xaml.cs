@@ -150,11 +150,11 @@ namespace LightAndDark
             //Changing player background on selected character
             if (NameTextBlock01.Text == "Carol")
             {
-                ImageChar01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/light_char_02.jpg"));
+                ImageChar01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/light_char_02.jpg"));
             }
             if (NameTextBlock01.Text == "Sheen")
             {
-                ImageChar01.Source = new BitmapImage(new Uri("https://student.sps-prosek.cz/~drechlu14/pics/light_char_03.jpg"));
+                ImageChar01.Source = new BitmapImage(new Uri(@"pack://application:,,,/pics/light_char_03.jpg"));
             }
 
 
@@ -234,7 +234,7 @@ namespace LightAndDark
                     "It looks like my first enemy was defeated, I don't want to see them anymore!" +
                     " It was an easy fight,.. but truly, I know that this was just" +
                     " one of the weak Tenebri. So in the end I'll have to fight with" +
-                    " much stronger enemies. For now on I have to move on";
+                    " much stronger enemies. For now on I have to move on.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
             if (count == 4)
@@ -343,6 +343,11 @@ namespace LightAndDark
             }
             if (count == 13)
             {
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Track07.wav"));
+                player.Load();
+                player.Play();
+
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                 StoryTextBlock.Text =
                     "„Extende ad lucem!“. My view distence is larger now and what just caught my eye" +
@@ -395,7 +400,7 @@ namespace LightAndDark
             if (count == 17)
             {
                 string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
-                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/08_amb.wav"));
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/ending_agrippa.wav"));
                 player.Load();
                 player.Play();
                 ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
@@ -464,7 +469,7 @@ namespace LightAndDark
                 StoryTextBlock.Text =
                     "Alright, that was an intense battle, I’ve barely dodged his fast paced attacks." +
                     " How could he be so fast with his katana? Nevermind, let’s progress, I’m really" +
-                    " interested what’s at the top of the tower and I hope he was the only guardian";
+                    " interested what’s at the top of the tower and I hope he was the only guardian.";
                 StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
             }
             if (count == 24)
@@ -492,6 +497,7 @@ namespace LightAndDark
                 SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/01_paper_self.wav"));
                 player.Load();
                 player.Play();
+
                 //This is the place where storyline divide into two ways, these two conditions displays each of the ways
                 //First choice
                 if (FirstChoiceAreaButtonWasClicked)
@@ -515,7 +521,7 @@ namespace LightAndDark
                     ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
                         "The climate is drasticaly changing on my way to the second tower, it’s much colder here." +
-                        " Also I haven’t seen any Temebri so far, I don’t know if I should be happy about that. I" +
+                        " Also I haven’t seen any Tenebri so far, I don’t know if I should be happy about that. I" +
                         " just have to be caraful, who knows what kind of darkness can hide in these conditions.";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
@@ -527,6 +533,11 @@ namespace LightAndDark
             }
             if (count == 28)
             {
+                string rootLocation = System.AppDomain.CurrentDomain.BaseDirectory;
+                SoundPlayer player = new SoundPlayer(System.IO.Path.GetFullPath(rootLocation + "/music/Track06.wav"));
+                player.Load();
+                player.Play();
+
                 if (FirstChoiceAreaButtonWasClicked)
                 {
                     ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
@@ -701,7 +712,8 @@ namespace LightAndDark
                 {
                     ((Storyboard)FindResource("animate")).Begin(StoryTextBlock);
                     StoryTextBlock.Text =
-                        "Epilogue: Thank you for playing this game. Game creator: Lukas Drechsel ; . . . . . . . . . . Music (5th): Tomas Biza";
+                        "Epilogue: Thank you for playing this game. Game creator: Lukas Drechsel ; . . . . . . . . . . Music (5th):" +
+                        " Tomas Biza ; . . . . . . . . . . . . Other music: Amnesia, Another";
                     StoryTextBlock.Style = (Style)Application.Current.Resources["ListViewItemTextBlockStyle"];
 
                     NextButton.Content = "The END";
